@@ -11,8 +11,8 @@ bool loadMedia();
 //Frees media and shuts down SDL
 void close();
 
-int SCREEN_WIDTH = 550;
-int SCREEN_HEIGHT = 550;
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 800;
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
@@ -54,11 +54,11 @@ bool loadMedia()
 	//Loading success flag
 	bool success = true;
 	//Load splash image
-	gBoard = SDL_LoadBMP("Images/ChestBoard.bmp");
+	gBoard = SDL_LoadBMP("Images/Chest2.bmp");
 
 	if (gBoard == NULL)
 	{
-		printf("Unable to load image %s! SDL Error: %s\n", "Images/ChestBoard.bmp", SDL_GetError());
+		printf("Unable to load image %s! SDL Error: %s\n", "Images/Chest2.bmp", SDL_GetError());
 		success = false;
 	}
 	return success;
