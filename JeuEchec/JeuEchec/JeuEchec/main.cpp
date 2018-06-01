@@ -6,10 +6,11 @@ and may not be redistributed without written permission.*/
 #include <SDL_image.h>
 #include <stdio.h>
 #include <string>
+#include <vector>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 750;
+const int SCREEN_HEIGHT = 750;
 
 //Starts up SDL and creates window
 bool init();
@@ -20,6 +21,10 @@ bool loadMedia();
 //Frees media and shuts down SDL
 void close();
 
+SDL_Rect gBoard = { 50, 50, 650, 650 };
+
+std::vector<std::vector<SDL_Rect>> gCase;
+
 //Loads individual image
 SDL_Surface* loadSurface(std::string path);
 
@@ -29,11 +34,40 @@ SDL_Window* gWindow = NULL;
 //The surface contained by the window
 SDL_Surface* gScreenSurface = NULL;
 
+//TO JETÉ
+SDL_Surface* gPNGSurfaceTEST = NULL;
+
 //Current displayed PNG image
 SDL_Surface* gPNGSurface = NULL;
+std::vector<std::vector<SDL_Surface*>> gPNGSurfacePiece;
 
 bool init()
 {
+	int XPos = 50;
+	int YPos = 50;
+	for (int i = 0; i < 8; i++)
+	{		
+		gCase.push_back(std::vector<SDL_Rect>());		
+
+		for (int j = 0; j < 8; j++)
+		{
+			gCase[i].push_back ({ XPos, YPos, 650/8, 650/8 });
+			YPos += (650 / 8);
+			if (YPos >= 700)
+				YPos = 50;
+		}
+		XPos += (650 / 8);
+	}
+
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	gPNGSurfacePiece[i].push_back;
+	//	for (int j = 0; j < 8; j++)
+	//	{
+	//		//SDL_RenderDrawRect(renderer, &gCase[i][j]);
+	//		gPNGSurfacePiece[i][j];
+	//	}
+	//}
 	//Initialization flag
 	bool success = true;
 
@@ -78,12 +112,27 @@ bool loadMedia()
 	bool success = true;
 
 	//Load PNG surface
-	gPNGSurface = loadSurface("loaded.png");
+	gPNGSurface = loadSurface("Chest2.png");
 	if (gPNGSurface == NULL)
 	{
 		printf("Failed to load PNG image!\n");
 		success = false;
 	}
+	gPNGSurfaceTEST = loadSurface("piecenoire.png");
+	if (gPNGSurfaceTEST == NULL)
+	{
+		printf("Failed to load PNG image!\n");
+		success = false;
+	}
+	
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	for (int j = 0; j < 8; j++)
+	//	{
+	//		//SDL_RenderDrawRect(renderer, &gCase[i][j]);
+	//		SDL_BlitSurface(gPNGSurfacePiece, NULL, gScreenSurface, &gCase[i][j]);
+	//	}
+	//}
 
 	return success;
 }
@@ -130,6 +179,15 @@ SDL_Surface* loadSurface(std::string path)
 	return optimizedSurface;
 }
 
+//for (int i = 0; i < 8; i++)
+//{
+//	for (int j = 0; j < 8; j++)
+//	{
+//		//SDL_RenderDrawRect(renderer, &gCase[i][j]);
+//		SDL_BlitSurface(gPNGSurfacePiece, NULL, gScreenSurface, &gCase[i][j]);
+//	}
+//}
+
 int main(int argc, char* args[])
 {
 	//Start up SDL and create window
@@ -166,7 +224,17 @@ int main(int argc, char* args[])
 				}
 
 				//Apply the PNG image
-				SDL_BlitSurface(gPNGSurface, NULL, gScreenSurface, NULL);
+				SDL_BlitSurface(gPNGSurface, NULL, gScreenSurface, &gBoard);
+				SDL_BlitSurface(gPNGSurfaceTEST, NULL, gScreenSurface, &gCase[0][0]);
+			
+				//for (int i = 0; i < 8; i++)
+				//{
+				//	for (int j = 0; j < 8; j++)
+				//	{
+				//		//SDL_RenderDrawRect(renderer, &gCase[i][j]);
+				//		SDL_BlitSurface(gPNGSurfacePiece, NULL, gScreenSurface, &gCase[i][j]);
+				//	}
+				//}
 
 				//Update the surface
 				SDL_UpdateWindowSurface(gWindow);
