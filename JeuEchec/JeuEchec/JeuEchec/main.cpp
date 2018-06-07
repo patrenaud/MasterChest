@@ -101,7 +101,7 @@ bool init()
 		gPNGSurfacePiece.push_back(std::vector<SDL_Surface*>());
 		for (int j = 0; j < 8; j++)
 		{
-			gPNGSurfacePiece[i].push_back(loadSurface("piecenoire.png"));
+			gPNGSurfacePiece[i].push_back(loadSurface("pokemon.png"));
 			gCase[i].push_back({ XPos, YPos, static_cast<int>(665 / 8), static_cast<int>(665 / 8) });
 			YPos += (665 / 8);
 		}
