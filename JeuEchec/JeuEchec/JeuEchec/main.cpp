@@ -6,6 +6,7 @@ and may not be redistributed without written permission.*/
 #include <SDL_image.h>
 #include <stdio.h>
 #include <string>
+#include <iostream>
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -79,6 +80,7 @@ bool loadMedia()
 
 	//Load PNG surface
 	gPNGSurface = loadSurface("loaded.png");
+
 	if (gPNGSurface == NULL)
 	{
 		printf("Failed to load PNG image!\n");
@@ -162,6 +164,14 @@ int main(int argc, char* args[])
 					if (e.type == SDL_QUIT)
 					{
 						quit = true;
+					}
+
+					if (e.type == SDL_MOUSEMOTION)
+					{
+						int x = 0;
+						int y = 0;
+						SDL_GetMouseState(&x, &y);
+						std::cout << "x: " << x << "y: " << y << std::endl;
 					}
 				}
 
