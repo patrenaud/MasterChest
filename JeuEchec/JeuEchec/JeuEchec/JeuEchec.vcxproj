@@ -120,7 +120,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cheval.cpp" />
+    <ClCompile Include="Fou.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pieces.cpp" />
+    <ClCompile Include="Pion.cpp" />
+    <ClCompile Include="Reine.cpp" />
+    <ClCompile Include="Roi.cpp" />
+    <ClCompile Include="Tour.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Cheval.h" />
+    <ClInclude Include="Fou.h" />
+    <ClInclude Include="Pieces.h" />
+    <ClInclude Include="Pion.h" />
+    <ClInclude Include="Reine.h" />
+    <ClInclude Include="Roi.h" />
+    <ClInclude Include="Tour.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
