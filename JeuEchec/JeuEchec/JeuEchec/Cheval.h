@@ -6,5 +6,7 @@ class Cheval :
 public:
 	Cheval();
 	~Cheval();
+
+	// OVERRIDE fonction de déplacement
 };
 

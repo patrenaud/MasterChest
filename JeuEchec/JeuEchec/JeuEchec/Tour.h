@@ -6,5 +6,7 @@ class Tour :
 public:
 	Tour();
 	~Tour();
+
+	// OVERRIDE fonction de déplacement
 };
 

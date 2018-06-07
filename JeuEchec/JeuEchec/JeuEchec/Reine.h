@@ -6,5 +6,7 @@ class Reine :
 public:
 	Reine();
 	~Reine();
+
+	// OVERRIDE fonction de déplacement
 };
 

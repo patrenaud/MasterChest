@@ -36,10 +36,10 @@
     <ClCompile Include="Reine.cpp">
       <Filter>Fichiers sources\Pieces</Filter>
     </ClCompile>
-    <ClCompile Include="Roi.cpp">
+    <ClCompile Include="Tour.cpp">
       <Filter>Fichiers sources\Pieces</Filter>
     </ClCompile>
-    <ClCompile Include="Tour.cpp">
+    <ClCompile Include="Roi.cpp">
       <Filter>Fichiers sources\Pieces</Filter>
     </ClCompile>
   </ItemGroup>

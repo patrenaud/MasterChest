@@ -6,5 +6,7 @@ class Pion :
 public:
 	Pion();
 	~Pion();
+
+	// OVERRIDE fonction de déplacement
 };
 

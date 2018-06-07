@@ -6,5 +6,7 @@ class Fou :
 public:
 	Fou();
 	~Fou();
+
+	// OVERRIDE fonction de déplacement
 };
 
