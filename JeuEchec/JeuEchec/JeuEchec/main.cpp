@@ -11,8 +11,8 @@ and may not be redistributed without written permission.*/
 #include "Board.h"
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 750;
-const int SCREEN_HEIGHT = 750;
+const int SCREEN_WIDTH = 1000;
+const int SCREEN_HEIGHT = 1000;
 
 //Starts up SDL and creates window
 bool init();
@@ -21,7 +21,7 @@ bool init();
 //Frees media and shuts down SDL
 void close();
 
-SDL_Rect gBoard = { 50, 50, 665, 665 };
+SDL_Rect gBoard = { 100, 100, 1000, 1000 };
 
 std::vector<std::vector<SDL_Rect>> gCase;
 std::vector<std::vector<SDL_Surface*>> gPNGSurfacePiece;
@@ -73,20 +73,20 @@ bool init()
 		}
 	}
 
-	int XPos = 50;
-	int YPos = 50;
+	int XPos = 100;
+	int YPos = 100;
 	for (int i = 0; i < 8; i++)
 	{
 		gCase.push_back(std::vector<SDL_Rect>());
 		gPNGSurfacePiece.push_back(std::vector<SDL_Surface*>());
 		for (int j = 0; j < 8; j++)
 		{
-			gPNGSurfacePiece[i].push_back(IMG_Load("pokemon.png"));
-			gCase[i].push_back({ XPos, YPos, static_cast<int>(665 / 8), static_cast<int>(665 / 8) });
-			YPos += (665 / 8);
+			gPNGSurfacePiece[i].push_back(IMG_Load("images/bPion.png"));
+			gCase[i].push_back({ XPos, YPos, static_cast<int>(100), static_cast<int>(100) });
+			YPos += (100);
 		}
-		YPos = 50;
-		XPos += (665 / 8);
+		YPos = 100;
+		XPos += (100);
 	}
 
 	return success;
