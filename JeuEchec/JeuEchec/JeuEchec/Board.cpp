@@ -8,7 +8,6 @@
 Board::Board()
 {
 	//Load PNG surface
-
 	gPNGSurface = IMG_Load("images/ChestBoard.png");
 	gBoard = { 100, 100, 1000, 1000 };
 
@@ -26,4 +25,6 @@ void Board::Render(SDL_Surface* gScreenSurface)
 {
 	//Apply the PNG image
 	SDL_BlitSurface(gPNGSurface, NULL, gScreenSurface, &gBoard);
+
+	// ICI ON MET LE RENDER SUR TOUTE LES CASES DU BOARD (LE VECTOR DE VECTOR)
 }

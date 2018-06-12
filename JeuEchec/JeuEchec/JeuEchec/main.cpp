@@ -9,6 +9,7 @@ and may not be redistributed without written permission.*/
 #include <vector>
 #include <iostream>
 #include "Board.h"
+#include "Cases.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1000;
@@ -23,9 +24,8 @@ void close();
 
 SDL_Rect gBoard = { 100, 100, 1000, 1000 };
 
-std::vector<std::vector<SDL_Rect>> gCase;
-std::vector<std::vector<SDL_Surface*>> gPNGSurfacePiece;
 
+std::shared_ptr<Cases> m_Cases;
 std::shared_ptr<Board> board;
 
 
@@ -73,21 +73,7 @@ bool init()
 		}
 	}
 
-	int XPos = 100;
-	int YPos = 100;
-	for (int i = 0; i < 8; i++)
-	{
-		gCase.push_back(std::vector<SDL_Rect>());
-		gPNGSurfacePiece.push_back(std::vector<SDL_Surface*>());
-		for (int j = 0; j < 8; j++)
-		{
-			gPNGSurfacePiece[i].push_back(IMG_Load("images/bPion.png"));
-			gCase[i].push_back({ XPos, YPos, static_cast<int>(100), static_cast<int>(100) });
-			YPos += (100);
-		}
-		YPos = 100;
-		XPos += (100);
-	}
+	
 
 	return success;
 }
@@ -96,8 +82,6 @@ bool init()
 
 void close()
 {
-
-
 	//Destroy window
 	SDL_DestroyWindow(gWindow);
 	gWindow = NULL;
@@ -126,6 +110,7 @@ int main(int argc, char* args[])
 
 		// On déclare la variable du board
 		board = std::make_shared<Board>();
+		m_Cases = std::make_shared<Cases>();
 
 		//While application is running
 		while (!quit)
@@ -147,20 +132,15 @@ int main(int argc, char* args[])
 					std::cout << "x: " << x << "y: " << y << std::endl;
 				}
 			}
-
-			board->Render(gScreenSurface);
-
-			for (int i = 0; i < 8; i++)
-			{
-				for (int j = 0; j < 8; j++)
-				{
-					//SDL_RenderDrawRect(renderer, &gCase[i][j]);
-					SDL_BlitSurface(gPNGSurfacePiece[i][j], NULL, gScreenSurface, &gCase[i][j]);
-				}
-			}
-
+			
 			//Update the surface
 			SDL_UpdateWindowSurface(gWindow);
+
+			// Ceci est pour render le board
+			board->Render(gScreenSurface);
+			// Ceci est pour afficher les différentes cases
+			m_Cases->Render(gScreenSurface);
+
 
 		}
 	}

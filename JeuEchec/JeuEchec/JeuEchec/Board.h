@@ -2,6 +2,7 @@
 #include <memory>
 #include <vector>
 #include <SDL.h>
+#include "Cases.h"
 
 class Piece;
 
@@ -21,6 +22,8 @@ private:
 
 	//The surface contained by the window
 	SDL_Surface* gPNGSurface = NULL;
+
+	std::vector<std::vector<Cases>> Cases;
 
 };
 
