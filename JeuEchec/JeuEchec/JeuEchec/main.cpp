@@ -7,6 +7,8 @@ and may not be redistributed without written permission.*/
 #include <stdio.h>
 #include <string>
 #include <vector>
+#include <iostream>
+#include "Board.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1000;
@@ -15,8 +17,6 @@ const int SCREEN_HEIGHT = 1000;
 //Starts up SDL and creates window
 bool init();
 
-//Loads media
-bool loadMedia();
 
 //Frees media and shuts down SDL
 void close();
@@ -26,9 +26,8 @@ SDL_Rect gBoard = { 100, 100, 800, 800 };
 std::vector<std::vector<SDL_Rect>> gCase;
 std::vector<std::vector<SDL_Surface*>> gPNGSurfacePiece;
 
+std::shared_ptr<Board> board;
 
-//Loads individual image
-SDL_Surface* loadSurface(std::string path);
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
@@ -39,8 +38,6 @@ SDL_Surface* gScreenSurface = NULL;
 //TO JETÉ
 SDL_Surface* gPNGSurfaceTEST = NULL;
 
-//Current displayed PNG image
-SDL_Surface* gPNGSurface = NULL;
 
 
 bool init()
@@ -88,9 +85,15 @@ bool init()
 		gPNGSurfacePiece.push_back(std::vector<SDL_Surface*>());
 		for (int j = 0; j < 8; j++)
 		{
+<<<<<<< HEAD
 			gPNGSurfacePiece[i].push_back(loadSurface("bPion.png"));
 			gCase[i].push_back({ XPos, YPos, static_cast<int>(100), static_cast<int>(100) });
 			YPos += (100);
+=======
+			gPNGSurfacePiece[i].push_back(IMG_Load("pokemon.png"));
+			gCase[i].push_back({ XPos, YPos, static_cast<int>(665 / 8), static_cast<int>(665 / 8) });
+			YPos += (665 / 8);
+>>>>>>> master
 		}
 		YPos = 100;
 		XPos += (100);
@@ -99,6 +102,7 @@ bool init()
 	return success;
 }
 
+<<<<<<< HEAD
 bool loadMedia()
 {
 	//Loading success flag
@@ -111,15 +115,13 @@ bool loadMedia()
 		printf("Failed to load PNG image!\n");
 		success = false;
 	}
+=======
+>>>>>>> master
 
-	return success;
-}
 
 void close()
 {
-	//Free loaded image
-	SDL_FreeSurface(gPNGSurface);
-	gPNGSurface = NULL;
+
 
 	//Destroy window
 	SDL_DestroyWindow(gWindow);
@@ -130,10 +132,13 @@ void close()
 	SDL_Quit();
 }
 
+<<<<<<< HEAD
 SDL_Surface* loadSurface(std::string path)
 {
 	return IMG_Load(path.c_str());;
 }
+=======
+>>>>>>> master
 
 int main(int argc, char* args[])
 {
@@ -144,48 +149,51 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		//Load media
-		if (!loadMedia())
-		{
-			printf("Failed to load media!\n");
-		}
-		else
-		{
-			//Main loop flag
-			bool quit = false;
 
-			//Event handler
-			SDL_Event e;
+		//Main loop flag
+		bool quit = false;
 
-			//While application is running
-			while (!quit)
+		//Event handler
+		SDL_Event e;
+
+		// On déclare la variable du board
+		board = std::make_shared<Board>();
+
+		//While application is running
+		while (!quit)
+		{
+			//Handle events on queue
+			while (SDL_PollEvent(&e) != 0)
 			{
-				//Handle events on queue
-				while (SDL_PollEvent(&e) != 0)
+				//User requests quit
+				if (e.type == SDL_QUIT)
 				{
-					//User requests quit
-					if (e.type == SDL_QUIT)
-					{
-						quit = true;
-					}
+					quit = true;
 				}
 
-				//Apply the PNG image
-				SDL_BlitSurface(gPNGSurface, NULL, gScreenSurface, &gBoard);
-				//SDL_BlitSurface(gPNGSurfaceTEST, NULL, gScreenSurface, &gCase[0][0]);
-				
-				for (int i = 0; i < 8; i++)
+				if (e.type == SDL_MOUSEMOTION)
 				{
-					for (int j = 0; j < 8; j++)
-					{
-						//SDL_RenderDrawRect(renderer, &gCase[i][j]);
-						SDL_BlitSurface(gPNGSurfacePiece[i][j], NULL, gScreenSurface, &gCase[i][j]);
-					}
+					int x = 0;
+					int y = 0;
+					SDL_GetMouseState(&x, &y);
+					std::cout << "x: " << x << "y: " << y << std::endl;
 				}
-
-				//Update the surface
-				SDL_UpdateWindowSurface(gWindow);
 			}
+
+			board->Render(gScreenSurface);
+
+			for (int i = 0; i < 8; i++)
+			{
+				for (int j = 0; j < 8; j++)
+				{
+					//SDL_RenderDrawRect(renderer, &gCase[i][j]);
+					SDL_BlitSurface(gPNGSurfacePiece[i][j], NULL, gScreenSurface, &gCase[i][j]);
+				}
+			}
+
+			//Update the surface
+			SDL_UpdateWindowSurface(gWindow);
+
 		}
 	}
 	system("pause");
