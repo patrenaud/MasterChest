@@ -10,8 +10,8 @@
 Board::Board()
 {
 	//Load PNG surface
-	gPNGSurface = IMG_Load("Chest2.png");
-	gBoard = { 50, 50, 665, 665 };
+	gPNGSurface = IMG_Load("images/ChestBoard.png");
+	gBoard = { 100, 100, 1000, 1000 };
 }
 
 
