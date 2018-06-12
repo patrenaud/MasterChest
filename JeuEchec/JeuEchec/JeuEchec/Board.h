@@ -15,8 +15,10 @@ public:
 
 private:
 	std::vector<std::shared_ptr<Piece>> Piece;
+
 	// Main window
 	SDL_Rect gBoard;
+
 	//The surface contained by the window
 	SDL_Surface* gPNGSurface = NULL;
 

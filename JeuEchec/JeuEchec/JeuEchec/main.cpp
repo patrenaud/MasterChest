@@ -35,10 +35,6 @@ SDL_Window* gWindow = NULL;
 //The surface contained by the window
 SDL_Surface* gScreenSurface = NULL;
 
-//TO JETÉ
-SDL_Surface* gPNGSurfaceTEST = NULL;
-
-
 
 bool init()
 {
