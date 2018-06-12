@@ -1,7 +1,7 @@
 #pragma once
-#include "Pieces.h"
+#include "Piece.h"
 class Tour :
-	public Pieces
+	public Piece
 {
 public:
 	Tour();

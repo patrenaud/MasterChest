@@ -1,7 +1,7 @@
 #pragma once
-#include "Pieces.h"
+#include "Piece.h"
 class Roi :
-	public Pieces
+	public Piece
 {
 public:
 	Roi();
