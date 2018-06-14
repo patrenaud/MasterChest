@@ -8,17 +8,22 @@ class Piece;
 class Case
 {
 public:
-	SDL_Rect gCase;
-	int XPos = 100;
-	int YPos = 100;
+	Case(const int x, const int y, std::shared_ptr<Piece> aPiece = nullptr);
+	~Case();
 
+	SDL_Rect& GetRect() { return gCase; }
+	void Render(SDL_Surface* gScreenSurface);
+
+	void Reset();
+
+private:
+	SDL_Rect gCase;
+	int XPos;
+	int YPos;
 
 	std::shared_ptr<Piece> gPiece;
 
-	void Render(SDL_Surface* gScreenSurface);
+	
 
-	Case(const int x,const int y, std::shared_ptr<Piece> aPiece = nullptr);
-
-	~Case();
 };
 

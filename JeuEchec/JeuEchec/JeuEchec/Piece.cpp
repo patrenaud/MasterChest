@@ -11,6 +11,9 @@ Piece::Piece(bool IsBlack)
 
 Piece::~Piece()
 {
+	//Free loaded image
+	SDL_FreeSurface(m_Texture);
+	m_Texture = NULL;
 }
 
 void Piece::Render(SDL_Surface* gScreenSurface, SDL_Rect* Rect)

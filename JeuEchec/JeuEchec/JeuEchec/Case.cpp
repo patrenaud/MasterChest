@@ -5,6 +5,8 @@
 
 Case::Case(const int x, const int y, std::shared_ptr<Piece> aPiece)
 {
+	XPos = x;
+	YPos = y;
 	gCase = { x, y, 100, 100 };
 	gPiece = aPiece;
 }
@@ -20,4 +22,10 @@ void Case::Render(SDL_Surface* gScreenSurface)
 	{
 		gPiece->Render(gScreenSurface, &gCase);
 	}
+}
+
+void Case::Reset() 
+{
+	gCase.x = XPos;
+	gCase.y = YPos;
 }

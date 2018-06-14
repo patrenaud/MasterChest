@@ -10,6 +10,8 @@ and may not be redistributed without written permission.*/
 #include <iostream>
 #include "Board.h"
 #include "Case.h"
+#include "Piece.h"
+#include "Controls.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1000;
@@ -18,12 +20,13 @@ const int SCREEN_HEIGHT = 1000;
 //Starts up SDL and creates window
 bool init();
 
+std::shared_ptr<Controls> controls = std::make_shared<Controls>();
+
 
 //Frees media and shuts down SDL
 void close();
 
-std::shared_ptr<Board> board;
-
+std::shared_ptr<Board> board = std::make_shared<Board>();
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
@@ -92,44 +95,25 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-
 		//Main loop flag
 		bool quit = false;
 
 		//Event handler
 		SDL_Event e;
 
-		// On déclare la variable du board
-		board = std::make_shared<Board>();
 
 		//While application is running
 		while (!quit)
-		{
-			//Handle events on queue
-			while (SDL_PollEvent(&e) != 0)
-			{
-				//User requests quit
-				if (e.type == SDL_QUIT)
-				{
-					quit = true;
-				}
-
-				if (e.type == SDL_MOUSEMOTION)
-				{
-					int x = 0;
-					int y = 0;
-					SDL_GetMouseState(&x, &y);
-					std::cout << "x: " << x << "y: " << y << std::endl;
-				}
-			}
-			
+		{		
 			//Update the surface
 			SDL_UpdateWindowSurface(gWindow);
-
 			// Ceci est pour render le board
 			board->Render(gScreenSurface);
+
+			controls->Update(board);
 		}
 	}
+
 	system("pause");
 	//Free resources and close SDL
 	close();

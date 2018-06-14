@@ -14,6 +14,8 @@ public:
 	Board();
 	~Board();
 	void Render(SDL_Surface* gScreenSurface);
+	std::shared_ptr<Case> GetCase(int i, int j) {return gCase[i][j]; }
+	
 
 private:
 
