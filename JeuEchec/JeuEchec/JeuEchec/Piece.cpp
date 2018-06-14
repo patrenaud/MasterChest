@@ -3,9 +3,8 @@
 
 
 
-Piece::Piece(bool IsBlack)
+Piece::Piece()
 {	
-	m_Texture = IsBlack ? IMG_Load("images/bPion.png") : IMG_Load("images/wPion.png");
 }
 
 

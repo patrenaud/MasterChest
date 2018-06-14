@@ -4,7 +4,8 @@ class Roi :
 	public Piece
 {
 public:
-	Roi();
+	Roi() {}
+	Roi(bool IsBlack);
 	~Roi();
 
 	// OVERRIDE fonction de déplacement

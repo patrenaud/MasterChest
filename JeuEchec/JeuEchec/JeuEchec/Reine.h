@@ -4,7 +4,8 @@ class Reine :
 	public Piece
 {
 public:
-	Reine();
+	Reine() {}
+	Reine(bool IsBlack);
 	~Reine();
 
 	// OVERRIDE fonction de déplacement
