@@ -105,12 +105,18 @@ int main(int argc, char* args[])
 		//While application is running
 		while (!quit)
 		{		
+
+			
 			//Update the surface
 			SDL_UpdateWindowSurface(gWindow);
+
+
+
 			// Ceci est pour render le board
 			board->Render(gScreenSurface);
 
-			controls->Update(board);
+
+			controls->Update(board, gScreenSurface);
 		}
 	}
 

@@ -8,7 +8,6 @@ public:
 	Tour(bool IsBlack);
 	~Tour();
 
-
-	// OVERRIDE fonction de déplacement
+	virtual void Move() { std::cout << "tour" << std::endl; }	
 };
 

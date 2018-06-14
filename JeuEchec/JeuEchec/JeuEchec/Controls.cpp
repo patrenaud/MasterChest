@@ -1,7 +1,7 @@
 #include "Controls.h"
 #include "Board.h"
 #include "Case.h"
-
+#include "Piece.h"
 
 
 Controls::Controls()
@@ -12,7 +12,7 @@ Controls::~Controls()
 {
 }
 
-void Controls::Update(const std::shared_ptr<Board>& board)
+void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 {
 	//Main loop flag
 	bool quit = false;
@@ -20,10 +20,15 @@ void Controls::Update(const std::shared_ptr<Board>& board)
 	//Event handler
 	SDL_Event e;
 
+	if (_case != nullptr)
+	{
+		_case->Render(screen);
+	}
 
 	//Handle events on queue
 	while (SDL_PollEvent(&e) != 0)
 	{
+
 		//User requests quit
 		if (e.type == SDL_QUIT)
 		{
@@ -40,24 +45,20 @@ void Controls::Update(const std::shared_ptr<Board>& board)
 
 			if (_case != nullptr)
 			{
-				_case->GetRect().x = x;
-				_case->GetRect().y = y;
+				_case->GetRect().x = x - 50;
+				_case->GetRect().y = y - 50;
+				_case->GetPiece()->Move();
 			}
-
-			//std::cout << "x: " << x << "y: " << y << std::endl;
 		}
 
 		if (e.type == SDL_MOUSEBUTTONDOWN)
 		{
 			int x = 0;
 			int y = 0;
-			SDL_GetMouseState(&x, &y);
+			SDL_GetMouseState(&y, &x);
 
 			_case = board->GetCase((x - 100) / 100, (y - 100) / 100);
 			std::cout << x / 100 << "  " << y / 100 << std::endl;
-
-			//Case->GetRect().x = 0;
-			//Case->GetRect().y = 0;
 		}
 
 		if (e.type == SDL_MOUSEBUTTONUP)

@@ -12,6 +12,8 @@ public:
 	~Case();
 
 	SDL_Rect& GetRect() { return gCase; }
+	std::shared_ptr<Piece>& GetPiece() { return gPiece; }
+	
 	void Render(SDL_Surface* gScreenSurface);
 
 	void Reset();

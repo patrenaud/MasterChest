@@ -12,7 +12,7 @@ public:
 	Controls();
 	~Controls();
 
-	void Update(const std::shared_ptr<Board>& board);
+	void Update(const std::shared_ptr<Board>& board, SDL_Surface* screen);
 
 private:
 	
