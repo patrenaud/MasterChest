@@ -4,7 +4,8 @@ class Tour :
 	public Piece
 {
 public:
-	Tour();
+	Tour() {}
+	Tour(bool IsBlack);
 	~Tour();
 
 

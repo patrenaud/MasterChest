@@ -8,8 +8,7 @@
 class Piece	
 {
 public:
-	Piece() {}
-	Piece(bool IsBlack);
+	Piece();
 	~Piece();
 
 	void Render(SDL_Surface* gScreenSurface, SDL_Rect* Rect);

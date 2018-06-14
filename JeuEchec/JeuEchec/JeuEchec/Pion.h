@@ -4,7 +4,8 @@ class Pion :
 	public Piece
 {
 public:
-	Pion();
+	Pion() {}
+	Pion(bool IsBlack);
 	~Pion();
 
 	// OVERRIDE fonction de déplacement

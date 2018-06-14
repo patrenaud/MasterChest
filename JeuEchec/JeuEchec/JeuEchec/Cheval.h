@@ -4,7 +4,8 @@ class Cheval :
 	public Piece
 {
 public:
-	Cheval();
+	Cheval() {};
+	Cheval(bool IsBlack);
 	~Cheval();
 
 	// OVERRIDE fonction de déplacement
