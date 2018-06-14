@@ -89,8 +89,6 @@ Board::Board()
 }
 
 
-
-
 Board::~Board()
 {
 	//Free loaded image

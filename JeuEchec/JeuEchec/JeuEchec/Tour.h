@@ -8,6 +8,7 @@ public:
 	Tour(bool IsBlack);
 	~Tour();
 
-	virtual void Move() { std::cout << "tour" << std::endl; }	
+	virtual std::vector<std::shared_ptr<Vector2>> Move(int i, int j, const std::vector<std::vector<std::shared_ptr<Case>>>& cases);
+
 };
 

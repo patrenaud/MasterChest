@@ -7,7 +7,6 @@ public:
 	Pion() {}
 	Pion(bool IsBlack);
 	~Pion();
-
-	// OVERRIDE fonction de déplacement
+	
 };
 

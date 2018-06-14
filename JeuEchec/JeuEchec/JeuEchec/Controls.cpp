@@ -2,6 +2,7 @@
 #include "Board.h"
 #include "Case.h"
 #include "Piece.h"
+#include "Vector2.h"
 
 
 Controls::Controls()
@@ -47,7 +48,6 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 			{
 				_case->GetRect().x = x - 50;
 				_case->GetRect().y = y - 50;
-				_case->GetPiece()->Move();
 			}
 		}
 
@@ -56,13 +56,34 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 			int x = 0;
 			int y = 0;
 			SDL_GetMouseState(&y, &x);
+			std::shared_ptr<Vector2> Pos = std::make_shared<Vector2>(x, y);
 
-			_case = board->GetCase((x - 100) / 100, (y - 100) / 100);
-			std::cout << x / 100 << "  " << y / 100 << std::endl;
+			_case = board->GetCase(Pos->GetI(), Pos->GetJ());
+
+			//std::cout << x / 100 << "  " << y / 100 << std::endl;
+			 availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
+			 int b = 0;
+
 		}
 
 		if (e.type == SDL_MOUSEBUTTONUP)
 		{
+			int x = 0;
+			int y = 0;
+			SDL_GetMouseState(&y, &x);
+			std::shared_ptr<Vector2> Pos = std::make_shared<Vector2>(x, y);
+
+			for (int i = 0; i < availableMoves.size(); i++)
+			{
+				if (Pos->GetI() == availableMoves[i]->GetI() && 
+					Pos->GetJ() == availableMoves[i]->GetJ())
+				{
+					board->GetCase(Pos->GetI(), Pos->GetJ())->GetPiece() = _case->GetPiece();
+					_case->GetPiece() = nullptr;
+					std::cout << "trou" << std::endl;
+				}
+			}
+			
 			_case->Reset();
 			_case = nullptr;
 		}

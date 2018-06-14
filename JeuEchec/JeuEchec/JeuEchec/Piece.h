@@ -3,7 +3,9 @@
 #include <memory>
 #include <vector>
 #include <SDL.h>
+#include "Vector2.h"
 
+class Case;
 
 class Piece
 {
@@ -16,8 +18,12 @@ public:
 	SDL_Surface* m_Texture;
 
 	// Ici on doit avoir une VIRTUAL fonction pour le déplacement 
-	// On doit aussi avoir un load de png pour render les Piece.
-	virtual void Move() { std::cout << "Piece" << std::endl; }
+
+	virtual std::vector<std::shared_ptr<Vector2>> Move(int i, int j, const std::vector<std::vector<std::shared_ptr<Case>>>& cases)
+	{
+
+		return std::vector<std::shared_ptr<Vector2>>();
+	}
 
 };
 
