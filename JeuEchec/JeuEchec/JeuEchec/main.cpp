@@ -9,7 +9,7 @@ and may not be redistributed without written permission.*/
 #include <vector>
 #include <iostream>
 #include "Board.h"
-#include "Cases.h"
+#include "Case.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1000;
@@ -22,10 +22,6 @@ bool init();
 //Frees media and shuts down SDL
 void close();
 
-SDL_Rect gBoard = { 100, 100, 1000, 1000 };
-
-
-std::shared_ptr<Cases> m_Cases;
 std::shared_ptr<Board> board;
 
 
@@ -72,13 +68,8 @@ bool init()
 			}
 		}
 	}
-
-	
-
 	return success;
 }
-
-
 
 void close()
 {
@@ -110,7 +101,6 @@ int main(int argc, char* args[])
 
 		// On déclare la variable du board
 		board = std::make_shared<Board>();
-		m_Cases = std::make_shared<Cases>();
 
 		//While application is running
 		while (!quit)
@@ -138,10 +128,6 @@ int main(int argc, char* args[])
 
 			// Ceci est pour render le board
 			board->Render(gScreenSurface);
-			// Ceci est pour afficher les différentes cases
-			m_Cases->Render(gScreenSurface);
-
-
 		}
 	}
 	system("pause");

@@ -121,7 +121,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
-    <ClCompile Include="Cases.cpp" />
+    <ClCompile Include="Case.cpp" />
     <ClCompile Include="Cheval.cpp" />
     <ClCompile Include="Fou.cpp" />
     <ClCompile Include="main.cpp" />
@@ -133,7 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
-    <ClInclude Include="Cases.h" />
+    <ClInclude Include="Case.h" />
     <ClInclude Include="Cheval.h" />
     <ClInclude Include="Fou.h" />
     <ClInclude Include="Piece.h" />
