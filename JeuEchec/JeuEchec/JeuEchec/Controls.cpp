@@ -59,10 +59,12 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 			std::shared_ptr<Vector2> Pos = std::make_shared<Vector2>(x, y);
 
 			_case = board->GetCase(Pos->GetI(), Pos->GetJ());
-
+			if(_case->GetPiece() != nullptr)
+			{
 			//std::cout << x / 100 << "  " << y / 100 << std::endl;
 			 availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
 			 int b = 0;
+			}
 
 		}
 
@@ -80,7 +82,6 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 				{
 					board->GetCase(Pos->GetI(), Pos->GetJ())->GetPiece() = _case->GetPiece();
 					_case->GetPiece() = nullptr;
-					std::cout << "trou" << std::endl;
 				}
 			}
 			

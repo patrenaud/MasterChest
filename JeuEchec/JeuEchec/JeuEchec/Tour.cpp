@@ -4,7 +4,7 @@
 
 
 Tour::Tour(bool IsBlack)
-	: Piece(isBlack)
+	: Piece(IsBlack)
 {
 	m_Texture = IsBlack ? IMG_Load("images/bTower.png") : IMG_Load("images/wTower.png");
 }

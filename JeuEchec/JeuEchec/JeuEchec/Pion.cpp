@@ -3,7 +3,7 @@
 #include "Case.h"
 
 Pion::Pion(bool IsBlack)
-	: Piece(isBlack)
+	: Piece(IsBlack)
 {
 	m_Texture = IsBlack ? IMG_Load("images/bPion.png") : IMG_Load("images/wPion.png");
 }
@@ -24,45 +24,58 @@ std::vector<std::shared_ptr<Vector2>> Pion::Move(int i, int j, const std::vector
 	{
 		if (cases[i+1][j]->GetPiece() == nullptr)
 		{
-			vec.push_back(std::make_shared<Vector2>(i+1, j, true));
+			vec.push_back(std::make_shared<Vector2>(i + 1, j, true));
 		}
-		if (cases[i+1][j+1]->GetPiece() != nullptr)
+		else if (j < 7)
 		{
-			destination = cases[i+1][j+1]->GetPiece()->GetColor();
-			if (isBlack != destination)
+			if (cases[i + 1][j + 1]->GetPiece() != nullptr)
 			{
-				vec.push_back(std::make_shared<Vector2>(i+1, j+1, true));
+				destination = cases[i + 1][j + 1]->GetPiece()->GetColor();
+				if (isBlack != destination)
+				{
+					vec.push_back(std::make_shared<Vector2>(i + 1, j + 1, true));
+				}
 			}
 		}
-		if (cases[i+1][j-1]->GetPiece() != nullptr)
+		else if (j > 0)
 		{
-			destination = cases[i+1][j-1]->GetPiece()->GetColor();
-			if (isBlack != destination)
+			if (cases[i + 1][j - 1]->GetPiece() != nullptr)
 			{
-				vec.push_back(std::make_shared<Vector2>(i+1, j-1, true));
+				destination = cases[i + 1][j - 1]->GetPiece()->GetColor();
+				if (isBlack != destination)
+				{
+					vec.push_back(std::make_shared<Vector2>(i + 1, j - 1, true));
+				}
 			}
 		}
 	}
-	if (isBlack)
+	else if (isBlack)
 	{
 		if (cases[i-1][j]->GetPiece() == nullptr)
 		{
-			vec.push_back(std::make_shared<Vector2>(i + 1, j, true));
+			vec.push_back(std::make_shared<Vector2>(i - 1, j, true));
 		}
-		if (cases[i-1][j-1]->GetPiece() != nullptr)
+		else if (j > 0)
 		{
-			destination = cases[i-1][j-1]->GetPiece()->GetColor();
-			if (isBlack != destination)
+
+			if (cases[i - 1][j - 1]->GetPiece() != nullptr)
 			{
-				vec.push_back(std::make_shared<Vector2>(i-1, j-1 , true));
+				destination = cases[i - 1][j - 1]->GetPiece()->GetColor();
+				if (isBlack != destination)
+				{
+					vec.push_back(std::make_shared<Vector2>(i - 1, j - 1, true));
+				}
 			}
 		}
-		if (cases[i-1][j+1]->GetPiece() != nullptr)
+		else if (j < 7)
 		{
-			destination = cases[i-1][j+1]->GetPiece()->GetColor();
-			if (isBlack != destination)
+			if (cases[i - 1][j + 1]->GetPiece() != nullptr)
 			{
-				vec.push_back(std::make_shared<Vector2>(i-1, j+1, true));
+				destination = cases[i - 1][j + 1]->GetPiece()->GetColor();
+				if (isBlack != destination)
+				{
+					vec.push_back(std::make_shared<Vector2>(i - 1, j + 1, true));
+				}
 			}
 		}
 	}

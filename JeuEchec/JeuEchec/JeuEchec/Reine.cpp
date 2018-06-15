@@ -3,7 +3,7 @@
 
 
 Reine::Reine(bool IsBlack)
-	: Piece(isBlack)
+	: Piece(IsBlack)
 {
 	m_Texture = IsBlack ? IMG_Load("images/bQueen.png") : IMG_Load("images/wQueen.png");
 }

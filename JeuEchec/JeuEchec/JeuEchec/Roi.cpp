@@ -3,7 +3,7 @@
 
 
 Roi::Roi(bool IsBlack)
-	: Piece(isBlack)
+	: Piece(IsBlack)
 {
 	m_Texture = IsBlack ? IMG_Load("images/bKing.png") : IMG_Load("images/wKing.png");
 }
