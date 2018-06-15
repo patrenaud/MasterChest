@@ -1,9 +1,11 @@
 #include "Piece.h"
+#include "Board.h"
 #include <SDL_image.h>
 
 
 
-Piece::Piece()
+Piece::Piece(bool isBlack)
+	:isBlack(isBlack)
 {	
 }
 
