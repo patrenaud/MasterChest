@@ -4,6 +4,7 @@
 #include "Piece.h"
 #include "Vector2.h"
 
+Controls Turns;
 
 Controls::Controls()
 {
@@ -58,14 +59,26 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 			SDL_GetMouseState(&y, &x);
 			std::shared_ptr<Vector2> Pos = std::make_shared<Vector2>(x, y);
 
-			_case = board->GetCase(Pos->GetI(), Pos->GetJ());
-			if(_case->GetPiece() != nullptr)
-			{
-			//std::cout << x / 100 << "  " << y / 100 << std::endl;
-			 availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
-			 int b = 0;
-			}
+			if (Turns.m_WhitePlaying)
+			{				
+				_case = board->GetCase(Pos->GetI(), Pos->GetJ());
 
+				if (_case->GetPiece() != nullptr && _case ->GetPiece()->GetColor() != true)
+				{
+					availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
+					int b = 0;
+				}
+			}
+			else
+			{	
+				_case = board->GetCase(Pos->GetI(), Pos->GetJ());
+
+				if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor())
+				{
+					availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
+					int b = 0;
+				}
+			}
 		}
 
 		if (e.type == SDL_MOUSEBUTTONUP)
@@ -77,14 +90,15 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 
 			for (int i = 0; i < availableMoves.size(); i++)
 			{
-				if (Pos->GetI() == availableMoves[i]->GetI() && 
+				if (Pos->GetI() == availableMoves[i]->GetI() &&
 					Pos->GetJ() == availableMoves[i]->GetJ())
 				{
+					Turns.m_WhitePlaying = !Turns.m_WhitePlaying; // Ceci sera pour le turnbased
 					board->GetCase(Pos->GetI(), Pos->GetJ())->GetPiece() = _case->GetPiece();
-					_case->GetPiece() = nullptr;
+					_case->GetPiece() = nullptr;					
 				}
 			}
-			
+
 			_case->Reset();
 			_case = nullptr;
 		}

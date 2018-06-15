@@ -13,6 +13,7 @@ class Controls
 public:
 	Controls();
 	~Controls();
+	bool m_WhitePlaying = true;
 
 	void Update(const std::shared_ptr<Board>& board, SDL_Surface* screen);
 	const std::shared_ptr<Case> &GetCurrentCase() { return _case; }
