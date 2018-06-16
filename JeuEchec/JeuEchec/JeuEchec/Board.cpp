@@ -41,11 +41,11 @@ Board::Board()
 				}
 				else if (j == 3)
 				{
-					gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Roi>(false)));
+					gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Reine>(false)));
 				}
 				else if (j == 4)
 				{
-					gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Reine>(false)));
+					gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Roi>(false)));
 				}
 			}
 			else if (i == 1)
@@ -69,11 +69,11 @@ Board::Board()
 				}
 				else if (j == 3)
 				{
-					gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Roi>(true)));
+					gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Reine>(true)));
 				}
 				else if (j == 4)
 				{
-					gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Reine>(true)));
+					gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Roi>(true)));
 				}
 			}
 			else if (i == 6)

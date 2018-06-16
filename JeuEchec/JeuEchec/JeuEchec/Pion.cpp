@@ -26,7 +26,7 @@ std::vector<std::shared_ptr<Vector2>> Pion::Move(int i, int j, const std::vector
 		{
 			vec.push_back(std::make_shared<Vector2>(i + 1, j, true));
 		}
-		else if (j < 7)
+		else if (j <= 6)
 		{
 			if (cases[i + 1][j + 1]->GetPiece() != nullptr)
 			{
@@ -37,7 +37,7 @@ std::vector<std::shared_ptr<Vector2>> Pion::Move(int i, int j, const std::vector
 				}
 			}
 		}
-		else if (j > 0)
+		else if (j >= 1)
 		{
 			if (cases[i + 1][j - 1]->GetPiece() != nullptr)
 			{
@@ -55,7 +55,7 @@ std::vector<std::shared_ptr<Vector2>> Pion::Move(int i, int j, const std::vector
 		{
 			vec.push_back(std::make_shared<Vector2>(i - 1, j, true));
 		}
-		else if (j > 0)
+		else if (j >= 1)
 		{
 
 			if (cases[i - 1][j - 1]->GetPiece() != nullptr)
@@ -67,7 +67,7 @@ std::vector<std::shared_ptr<Vector2>> Pion::Move(int i, int j, const std::vector
 				}
 			}
 		}
-		else if (j < 7)
+		else if (j <= 6)
 		{
 			if (cases[i - 1][j + 1]->GetPiece() != nullptr)
 			{
