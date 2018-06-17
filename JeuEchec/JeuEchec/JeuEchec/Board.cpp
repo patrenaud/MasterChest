@@ -2,8 +2,8 @@
 #include <SDL_image.h>
 #include <stdio.h>
 #include <string>
+#include <memory>
 #include "Case.h"
-#include "Piece.h"
 
 #include "Pion.h"
 #include "Tour.h"
@@ -17,8 +17,11 @@ Board::Board()
 {
 	//Load PNG surface
 	gPNGSurface = IMG_Load("images/ChestBoard.png");
+
+	// Création du board
 	gBoard = { 100, 100, 1000, 1000 };
 
+	// Cette boucle est pour créer les différentes cases
 	for (int i = 0; i < 8; i++)
 	{
 		gCase.push_back(std::vector<std::shared_ptr<Case>>());
@@ -85,7 +88,6 @@ Board::Board()
 				gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i));
 			}
 		}
-
 	}
 }
 
@@ -98,10 +100,9 @@ Board::~Board()
 }
 
 void Board::Render(SDL_Surface* gScreenSurface)
-{
+{	
+	//Apply the PNG pour toutes les cases
 	SDL_BlitSurface(gPNGSurface, NULL, gScreenSurface, &gBoard);
-	//Apply the PNG image
-
 	for (int i = 0; i < 8; i++)
 	{	
 		for (int j = 0; j < 8; j++)
@@ -111,5 +112,5 @@ void Board::Render(SDL_Surface* gScreenSurface)
 	}
 	
 
-	// ICI ON MET LE RENDER SUR TOUTE LES CASES DU BOARD (LE VECTOR DE VECTOR)
+	// Ici on peut afficher des boutons pour les différentes options
 }

@@ -22,10 +22,10 @@ bool init();
 
 std::shared_ptr<Controls> controls = std::make_shared<Controls>();
 
-
 //Frees media and shuts down SDL
 void close();
 
+// Déclaration du board
 std::shared_ptr<Board> board = std::make_shared<Board>();
 
 //The window we'll be rendering to
@@ -112,9 +112,8 @@ int main(int argc, char* args[])
 			// Ceci est pour render le board
 			board->Render(gScreenSurface);
 
+			// This calls the diffrent events that can be called by user controls
 			controls->Update(board, gScreenSurface);
-
-
 		}
 	}
 

@@ -7,6 +7,7 @@ Fou::Fou(bool IsBlack)
 	: Piece(IsBlack)
 {
 	m_Texture = IsBlack ? IMG_Load("images/bFou.png") : IMG_Load("images/wFou.png");
+	m_Type = PieceType::Fou;
 }
 
 

@@ -6,6 +6,7 @@ Roi::Roi(bool IsBlack)
 	: Piece(IsBlack)
 {
 	m_Texture = IsBlack ? IMG_Load("images/bKing.png") : IMG_Load("images/wKing.png");
+	m_Type = PieceType::Roi;
 }
 
 
@@ -34,12 +35,12 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 			}
 		}
 	}
-	
+
 	if (i >= 1 && j >= 1)
 	{
 		if (cases[i - 1][j - 1]->GetPiece() == nullptr)
 		{
-				vec.push_back(std::make_shared<Vector2>(i - 1, j - 1, true));
+			vec.push_back(std::make_shared<Vector2>(i - 1, j - 1, true));
 		}
 	}
 	else
@@ -51,14 +52,14 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 		}
 	}
 
-	if (i >= 1 &&j <= 6)
+	if (i >= 1 && j <= 6)
 	{
 		if (cases[i - 1][j + 1]->GetPiece() == nullptr)
 		{
-				vec.push_back(std::make_shared<Vector2>(i - 1, j + 1, true));
+			vec.push_back(std::make_shared<Vector2>(i - 1, j + 1, true));
 		}
 		else
-		{	
+		{
 			bool destination = cases[i - 1][j + 1]->GetPiece()->GetColor();
 			if (myColor != destination)
 			{
@@ -66,7 +67,7 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 			}
 		}
 	}
-	
+
 
 	if (i <= 6)
 	{
@@ -88,7 +89,7 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 	{
 		if (cases[i + 1][j - 1]->GetPiece() == nullptr)
 		{
-				vec.push_back(std::make_shared<Vector2>(i + 1, j - 1, true));
+			vec.push_back(std::make_shared<Vector2>(i + 1, j - 1, true));
 		}
 		else
 		{
@@ -104,7 +105,7 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 	{
 		if (cases[i + 1][j + 1]->GetPiece() == nullptr)
 		{
-				vec.push_back(std::make_shared<Vector2>(i + 1, j + 1, true));
+			vec.push_back(std::make_shared<Vector2>(i + 1, j + 1, true));
 		}
 		else
 		{
@@ -115,13 +116,13 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 			}
 		}
 	}
-	
+
 
 	if (j >= 1)
 	{
 		if (cases[i][j - 1]->GetPiece() == nullptr)
 		{
-				vec.push_back(std::make_shared<Vector2>(i, j - 1, true));
+			vec.push_back(std::make_shared<Vector2>(i, j - 1, true));
 		}
 		else
 		{

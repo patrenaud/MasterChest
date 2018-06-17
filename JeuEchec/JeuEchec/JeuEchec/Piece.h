@@ -7,6 +7,18 @@
 
 class Case;
 
+enum PieceType
+{
+	Pion = 0,
+	Tour,
+	Cheval,
+	Reine,
+	Fou,
+	Roi,
+
+	Count,
+};
+
 class Piece
 {
 public:
@@ -21,6 +33,8 @@ public:
 	// Ici on doit avoir une VIRTUAL fonction pour le déplacement 
 	const bool GetColor() { return isBlack; }
 
+	const PieceType GetPieceType() { return m_Type; }
+
 	virtual std::vector<std::shared_ptr<Vector2>> Move(int i, int j, const std::vector<std::vector<std::shared_ptr<Case>>>& cases)
 	{
 		return std::vector<std::shared_ptr<Vector2>>();
@@ -28,6 +42,6 @@ public:
 
 protected:
 	bool isBlack;
-
+	PieceType m_Type;
 };
 
