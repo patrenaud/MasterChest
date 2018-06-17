@@ -54,7 +54,6 @@ Board::Board()
 			else if (i == 1)
 			{
 				gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Pion>(false)));
-				//gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i));
 			}
 			else if (i== 7)
 			{

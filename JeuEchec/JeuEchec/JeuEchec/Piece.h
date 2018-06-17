@@ -7,23 +7,23 @@
 
 class Case;
 
-enum PieceType
-{
-	Pion = 0,
-	Tour,
-	Cheval,
-	Reine,
-	Fou,
-	Roi,
-
-	Count,
-};
 
 class Piece
 {
 public:
-	Piece() {}
+	enum PieceType
+	{
+		Pion = 0,
+		Tour,
+		Cheval,
+		Reine,
+		Fou,
+		Roi
+
+	};
+
 	Piece(bool isBlack);
+	Piece() {}
 	~Piece();
 
 	void Render(SDL_Surface* gScreenSurface, SDL_Rect* Rect);
@@ -41,6 +41,8 @@ public:
 	}
 
 protected:
+
+
 	bool isBlack;
 	PieceType m_Type;
 };

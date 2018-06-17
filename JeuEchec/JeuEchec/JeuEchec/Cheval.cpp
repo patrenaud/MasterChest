@@ -6,7 +6,7 @@ Cheval::Cheval(bool IsBlack)
 	: Piece(IsBlack)
 {
 	m_Texture = IsBlack ? IMG_Load("images/bCavalier.png") : IMG_Load("images/wCavalier.png");
-	m_Type = PieceType::Cheval;
+	Piece::m_Type = PieceType::Cheval;
 }
 
 

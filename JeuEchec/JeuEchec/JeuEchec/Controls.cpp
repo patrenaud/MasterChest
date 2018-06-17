@@ -59,52 +59,47 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 			SDL_GetMouseState(&y, &x);
 			std::shared_ptr<Vector2> Pos = std::make_shared<Vector2>(x, y);
 
-			if (KingNeedsToMove = false)
+			/*if (KingNeedsToMove = false)
+			{*/
+			if (Turns.m_WhitePlaying) // Ce bool est pour générer le TurnBased du jeu
 			{
-				if (Turns.m_WhitePlaying) // Ce bool est pour générer le TurnBased du jeu
+				_case = board->GetCase(Pos->GetI(), Pos->GetJ());
+				// Need to find a Piece and it has to be the right color depending on turn
+				if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor() != true)
 				{
-					_case = board->GetCase(Pos->GetI(), Pos->GetJ());
-					// Need to find a Piece and it has to be the right color depending on turn
-					if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor() != true)
-					{
-						availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
-						int b = 0;
-					}
-				}
-				else
-				{
-					_case = board->GetCase(Pos->GetI(), Pos->GetJ());
-
-					if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor())
-					{
-						availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
-						int b = 0;
-					}
+					availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
 				}
 			}
 			else
 			{
+				_case = board->GetCase(Pos->GetI(), Pos->GetJ());
+
+				if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor())
+				{
+					availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
+				}
+			}
+			/*}
+			else
+			{
 				if (Turns.m_WhitePlaying) // Ce bool est pour générer le TurnBased du jeu
 				{
+					_case = board->GetCase(Pos->GetI(), Pos->GetJ());
 					// Can only move the white King
-					if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor() != true && _case->GetPiece()->GetPieceType() == PieceType::Roi)
+					if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor() != true && _case->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
 					{
 						availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
-						int b = 0;
 					}
-					//KingNeedsToMove = false;
 				}
 				else
 				{
 					// Can only move the black King
-					if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor() && _case->GetPiece()->GetPieceType() == PieceType::Roi)
+					if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor() && _case->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
 					{
 						availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
-						int b = 0;
 					}
-					//KingNeedsToMove = false;
 				}
-			}
+			}*/
 		}
 
 		if (e.type == SDL_MOUSEBUTTONUP)
@@ -121,8 +116,13 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 				{
 					Turns.m_WhitePlaying = !Turns.m_WhitePlaying; // When a piece is dropped to another spot, the player's turn is done (bool)
 					board->GetCase(Pos->GetI(), Pos->GetJ())->GetPiece() = _case->GetPiece();
+					if (_case->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+					{
+						KingNeedsToMove = false;
+					}
 					_case->GetPiece() = nullptr;
 					CheckKingStatus(board);
+
 				}
 
 			}
@@ -145,19 +145,18 @@ void CheckKingStatus(const std::shared_ptr<Board>& board)
 
 	for (int i = 0; i < CheckDanger.size(); i++)
 	{
-		// mcase crée la liste des mouvement de la nouvelle position de la pièce bougée
+		// m_case crée la liste des mouvement de la nouvelle position de la pièce bougée
 		std::shared_ptr<Case> m_case = board->GetCase(CheckDanger[i]->GetI(), CheckDanger[i]->GetJ());
 
-		if ((m_case->GetPiece()->GetPieceType() == PieceType::Roi) && m_case->GetPiece()->GetColor())
+		if ((m_case->GetPiece()->GetPieceType() == Piece::PieceType::Roi) && m_case->GetPiece()->GetColor())
 		{
 			KingNeedsToMove = true;
 			break;
 		}
-		else if ((m_case->GetPiece()->GetPieceType() == PieceType::Roi) && m_case->GetPiece()->GetColor() == false)
+		else if ((m_case->GetPiece()->GetPieceType() == Piece::PieceType::Roi) && m_case->GetPiece()->GetColor() == false)
 		{
 			KingNeedsToMove = true;
 			break;
 		}
 	}
-
 }

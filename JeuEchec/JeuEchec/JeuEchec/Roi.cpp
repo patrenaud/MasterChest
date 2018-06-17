@@ -6,7 +6,7 @@ Roi::Roi(bool IsBlack)
 	: Piece(IsBlack)
 {
 	m_Texture = IsBlack ? IMG_Load("images/bKing.png") : IMG_Load("images/wKing.png");
-	m_Type = PieceType::Roi;
+	Piece::m_Type = PieceType::Roi;
 }
 
 
