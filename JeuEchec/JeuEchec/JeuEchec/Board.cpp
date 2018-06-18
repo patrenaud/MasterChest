@@ -17,9 +17,13 @@ Board::Board()
 {
 	//Load PNG surface
 	gPNGSurface = IMG_Load("images/ChestBoard.png");
+<<<<<<< HEAD
 
 	// Création du board
 	gBoard = { 100, 100, 1000, 1000 };
+=======
+	gBoard = { 0, 0, 800, 800 };
+>>>>>>> Jim
 
 	// Cette boucle est pour créer les différentes cases
 	for (int i = 0; i < 8; i++)
@@ -33,21 +37,21 @@ Board::Board()
 				if (j == 0 || j == 7)
 				{
 					gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Tour>(false)));
-				}
-				else if (j == 1 || j == 6)
-				{
+				}														 
+				else if (j == 1 || j == 6)								 
+				{														 
 					gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Cheval>(false)));
-				}
-				else if (j == 2 || j == 5)
-				{
+				}														 
+				else if (j == 2 || j == 5)								 
+				{														 
 					gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Fou>(false)));
-				}
-				else if (j == 3)
-				{
+				}														 
+				else if (j == 3)										 
+				{														 
 					gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Reine>(false)));
-				}
-				else if (j == 4)
-				{
+				}														 
+				else if (j == 4)										 
+				{														 
 					gCase[i].push_back(std::make_shared<Case>(gBoard.x + 100 * j, gBoard.y + 100 * i, std::make_shared<Roi>(false)));
 				}
 			}
