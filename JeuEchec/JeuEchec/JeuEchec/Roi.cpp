@@ -41,15 +41,16 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 		{
 				vec.push_back(std::make_shared<Vector2>(i - 1, j - 1, true));
 		}
-	}
-	else
-	{
-		bool destination = cases[i - 1][j - 1]->GetPiece()->GetColor();
-		if (myColor != destination)
+		else
 		{
-			vec.push_back(std::make_shared<Vector2>(i - 1, j - 1, true));
+			bool destination = cases[i - 1][j - 1]->GetPiece()->GetColor();
+			if (myColor != destination)
+			{
+				vec.push_back(std::make_shared<Vector2>(i - 1, j - 1, true));
+			}
 		}
 	}
+
 
 	if (i >= 1 &&j <= 6)
 	{
@@ -76,7 +77,7 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 		}
 		else
 		{
-			bool destination = cases[i - 1][j]->GetPiece()->GetColor();
+			bool destination = cases[i + 1][j]->GetPiece()->GetColor();
 			if (myColor != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i + 1, j, true));
