@@ -59,8 +59,7 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 			SDL_GetMouseState(&y, &x);
 			std::shared_ptr<Vector2> Pos = std::make_shared<Vector2>(x, y);
 
-			/*if (KingNeedsToMove = false)
-			{*/
+
 			if (Turns.m_WhitePlaying) // Ce bool est pour générer le TurnBased du jeu
 			{
 				_case = board->GetCase(Pos->GetI(), Pos->GetJ());
@@ -79,27 +78,6 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 					availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
 				}
 			}
-			/*}
-			else
-			{
-				if (Turns.m_WhitePlaying) // Ce bool est pour générer le TurnBased du jeu
-				{
-					_case = board->GetCase(Pos->GetI(), Pos->GetJ());
-					// Can only move the white King
-					if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor() != true && _case->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
-					{
-						availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
-					}
-				}
-				else
-				{
-					// Can only move the black King
-					if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor() && _case->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
-					{
-						availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
-					}
-				}
-			}*/
 		}
 
 		if (e.type == SDL_MOUSEBUTTONUP)
@@ -116,10 +94,10 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 				{
 					Turns.m_WhitePlaying = !Turns.m_WhitePlaying; // When a piece is dropped to another spot, the player's turn is done (bool)
 					board->GetCase(Pos->GetI(), Pos->GetJ())->GetPiece() = _case->GetPiece();
-					if (_case->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+					/*if (_case->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
 					{
 						KingNeedsToMove = false;
-					}
+					}*/
 					_case->GetPiece() = nullptr;
 					CheckKingStatus(board);
 
