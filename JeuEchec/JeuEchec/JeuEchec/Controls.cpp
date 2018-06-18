@@ -92,17 +92,14 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 				if (Pos->GetI() == availableMoves[i]->GetI() &&
 					Pos->GetJ() == availableMoves[i]->GetJ())
 				{
-					Turns.m_WhitePlaying = !Turns.m_WhitePlaying; // When a piece is dropped to another spot, the player's turn is done (bool)
+					
 					board->GetCase(Pos->GetI(), Pos->GetJ())->GetPiece() = _case->GetPiece();
-					/*if (_case->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
-					{
-						KingNeedsToMove = false;
-					}*/
+					Turns.m_WhitePlaying = !Turns.m_WhitePlaying; // When a piece is dropped to another spot, the player's turn is done (bool)
+
 					_case->GetPiece() = nullptr;
 					CheckKingStatus(board);
 
 				}
-
 			}
 
 			_case->Reset();

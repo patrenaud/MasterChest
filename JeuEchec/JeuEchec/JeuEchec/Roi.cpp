@@ -52,12 +52,8 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 		}
 	}
 
-<<<<<<< HEAD
-	if (i >= 1 && j <= 6)
-=======
 
-	if (i >= 1 &&j <= 6)
->>>>>>> Jim
+	if (i >= 1 && j <= 6)
 	{
 		if (cases[i - 1][j + 1]->GetPiece() == nullptr)
 		{

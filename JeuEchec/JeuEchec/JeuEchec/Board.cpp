@@ -17,13 +17,10 @@ Board::Board()
 {
 	//Load PNG surface
 	gPNGSurface = IMG_Load("images/ChestBoard.png");
-<<<<<<< HEAD
-
+	
 	// Création du board
-	gBoard = { 100, 100, 1000, 1000 };
-=======
-	gBoard = { 0, 0, 800, 800 };
->>>>>>> Jim
+	gBoard = { 0, 0, 1000, 800 };
+
 
 	// Cette boucle est pour créer les différentes cases
 	for (int i = 0; i < 8; i++)
