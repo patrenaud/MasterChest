@@ -37,8 +37,6 @@ SDL_Surface* gScreenSurface = NULL;
 
 bool init()
 {
-	if()
-
 
 	//Initialization flag
 	bool success = true;
