@@ -37,6 +37,9 @@ SDL_Surface* gScreenSurface = NULL;
 
 bool init()
 {
+	if()
+
+
 	//Initialization flag
 	bool success = true;
 
@@ -114,8 +117,12 @@ int main(int argc, char* args[])
 
 			// This calls the diffrent events that can be called by user controls
 			controls->Update(board, gScreenSurface);
+					
+
 		}
 	}
+
+	
 
 	system("pause");
 	//Free resources and close SDL

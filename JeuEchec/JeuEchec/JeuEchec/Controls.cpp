@@ -4,6 +4,7 @@
 #include "Piece.h"
 #include "Vector2.h"
 #include "Roi.h"
+#include <fstream>
 
 Controls Turns;
 bool KingNeedsToMove = false;
@@ -78,6 +79,7 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 					availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
 				}
 			}
+
 		}
 
 		if (e.type == SDL_MOUSEBUTTONUP)
@@ -92,12 +94,13 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 				if (Pos->GetI() == availableMoves[i]->GetI() &&
 					Pos->GetJ() == availableMoves[i]->GetJ())
 				{
-					
+					SaveMove(_case, Pos);
+
 					board->GetCase(Pos->GetI(), Pos->GetJ())->GetPiece() = _case->GetPiece();
 					Turns.m_WhitePlaying = !Turns.m_WhitePlaying; // When a piece is dropped to another spot, the player's turn is done (bool)
 
 					_case->GetPiece() = nullptr;
-					CheckKingStatus(board);
+					//CheckKingStatus(board);
 
 				}
 			}
@@ -108,7 +111,19 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 	}
 }
 
-void CheckKingStatus(const std::shared_ptr<Board>& board)
+void Controls::SaveMove(std::shared_ptr<Case> _case, std::shared_ptr<Vector2> Pos)
+{	
+	std::ofstream SaveGame;
+	SaveGame.open("Save.txt", std::ios::app);
+
+	// Inverse I and J cause x and y are inverted on board.
+	SaveGame << _case->GetOrigin()->GetJ()  << " " << _case->GetOrigin()->GetI() << " " << Pos->GetI() << " " << Pos->GetJ() << std::endl;
+
+	SaveGame.close();
+}
+
+
+/*void Controls::CheckKingStatus(const std::shared_ptr<Board>& board)
 {
 	int x = 0;
 	int y = 0;
@@ -134,4 +149,4 @@ void CheckKingStatus(const std::shared_ptr<Board>& board)
 			break;
 		}
 	}
-}
+}*/
