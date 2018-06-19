@@ -3,9 +3,8 @@
 #include <SDL_image.h>
 
 
-
-Piece::Piece(bool isBlack)
-	:isBlack(isBlack)
+Piece::Piece(bool IsBlack)
+	:isBlack(IsBlack)
 {	
 }
 

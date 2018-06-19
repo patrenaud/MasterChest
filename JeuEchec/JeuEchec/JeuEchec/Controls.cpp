@@ -68,6 +68,11 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 				if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor() != true)
 				{
 					availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
+					
+					for(int i = 0; i < availableMoves.size(); i++)
+					{
+						board->GetCase(availableMoves[i]->GetI(), availableMoves[i]->GetJ())->SetHighlight(true);
+					}
 				}
 			}
 			else
@@ -77,39 +82,53 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 				if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor())
 				{
 					availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
+
+					for (int i = 0; i < availableMoves.size(); i++)
+					{
+						board->GetCase(availableMoves[i]->GetI(), availableMoves[i]->GetJ())->SetHighlight(true);
+					}
+				}
+				else
+				{
+					_case = nullptr;
 				}
 			}
 
 		}
-
-		if (e.type == SDL_MOUSEBUTTONUP)
+		else if (e.type == SDL_MOUSEBUTTONUP)
 		{
-			int x = 0;
-			int y = 0;
-			SDL_GetMouseState(&y, &x);
-			std::shared_ptr<Vector2> Pos = std::make_shared<Vector2>(x, y);
-
-			for (int i = 0; i < availableMoves.size(); i++)
+			if (_case != nullptr)
 			{
-				if (Pos->GetI() == availableMoves[i]->GetI() &&
-					Pos->GetJ() == availableMoves[i]->GetJ())
+				int x = 0;
+				int y = 0;
+				SDL_GetMouseState(&y, &x);
+				std::shared_ptr<Vector2> Pos = std::make_shared<Vector2>(x, y);
+
+				for (int i = 0; i < availableMoves.size(); i++)
 				{
-					SaveMove(_case, Pos);
+					for (int i = 0; i < availableMoves.size(); i++)
+					{
+						board->GetCase(availableMoves[i]->GetI(), availableMoves[i]->GetJ())->SetHighlight(false);
+					}
 
-					board->GetCase(Pos->GetI(), Pos->GetJ())->GetPiece() = _case->GetPiece();
-					Turns.m_WhitePlaying = !Turns.m_WhitePlaying; // When a piece is dropped to another spot, the player's turn is done (bool)
+					
 
-					_case->GetPiece() = nullptr;
-					//CheckKingStatus(board);
-
+						board->GetCase(Pos->GetI(), Pos->GetJ())->GetPiece() = _case->GetPiece();
+						Turns.m_WhitePlaying = !Turns.m_WhitePlaying; // When a piece is dropped to another spot, the player's turn is done (bool)
+						std::cout << Turns.m_WhitePlaying << std::endl;
+						_case->GetPiece() = nullptr;
+						
+						CheckKingStatus(board);
+					}
 				}
-			}
 
-			_case->Reset();
-			_case = nullptr;
+				_case->Reset();
+				_case = nullptr;
+			}
 		}
 	}
 }
+
 
 void Controls::SaveMove(std::shared_ptr<Case> _case, std::shared_ptr<Vector2> Pos)
 {	
