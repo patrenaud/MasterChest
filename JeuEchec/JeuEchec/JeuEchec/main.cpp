@@ -12,6 +12,8 @@ and may not be redistributed without written permission.*/
 #include "Case.h"
 #include "Piece.h"
 #include "Controls.h"
+#include <fstream>
+#include "Vector2.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1000;
@@ -102,11 +104,12 @@ int main(int argc, char* args[])
 		//Event handler
 		SDL_Event e;
 
+		// on ouvre le fichier de Save
+		std::ifstream fichier("Save.txt", std::ios::in);
 
 		//While application is running
 		while (!quit)
-		{		
-						
+		{
 			//Update the surface
 			SDL_UpdateWindowSurface(gWindow);
 
@@ -115,12 +118,43 @@ int main(int argc, char* args[])
 
 			// This calls the diffrent events that can be called by user controls
 			controls->Update(board, gScreenSurface);
+
+
+			if (fichier.is_open())  // si l'ouverture a réussi
+			{
+				std::vector<std::vector<int>> StartMoves = std::vector<std::vector<int>>();
+				std::vector<std::vector<int>> EndMoves = std::vector<std::vector<int>>();
+				
+				while (!fichier.eof())
+				{
+					char buffer[256];
+					fichier.getline(buffer, 256);
+					if (buffer[0] != '\0')
+					{
+						StartMoves.push_back(std::vector<int>({ (int)buffer[0] - 48, (int)buffer[1] - 48 }));
+						EndMoves.push_back(std::vector<int>({ (int)buffer[2] - 48, (int)buffer[3] - 48 }));
+					}
+				}
+				fichier.close();
+
+				for (int i = 0; i < StartMoves.size(); i++)
+				{
+					board->GetCase(EndMoves[i][0], EndMoves[i][1])->GetPiece() = board->GetCase(StartMoves[i][0], StartMoves[i][1])->GetPiece();
+					board->GetCase(StartMoves[i][0], StartMoves[i][1])->GetPiece() = nullptr;
 					
+					//Update the surface
+					SDL_UpdateWindowSurface(gWindow);
 
+					// Ceci est pour render le board
+					board->Render(gScreenSurface);
+
+					SDL_Delay(1000);
+				}
+
+				controls->m_WhitePlaying = !(StartMoves.size() % 2);
+			}
 		}
-	}
-
-	
+	}	
 
 	system("pause");
 	//Free resources and close SDL

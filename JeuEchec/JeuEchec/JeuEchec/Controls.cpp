@@ -6,7 +6,6 @@
 #include "Roi.h"
 #include <fstream>
 
-Controls Turns;
 bool KingNeedsToMove = false;
 
 Controls::Controls()
@@ -61,7 +60,7 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 			std::shared_ptr<Vector2> Pos = std::make_shared<Vector2>(x, y);
 
 
-			if (Turns.m_WhitePlaying) // Ce bool est pour générer le TurnBased du jeu
+			if (m_WhitePlaying) // Ce bool est pour générer le TurnBased du jeu
 			{
 				_case = board->GetCase(Pos->GetI(), Pos->GetJ());
 				// Need to find a Piece and it has to be the right color depending on turn
@@ -121,8 +120,8 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 						SaveMove(_case, Pos);
 						board->GetCase(Pos->GetI(), Pos->GetJ())->GetPiece() = _case->GetPiece();
 
-						Turns.m_WhitePlaying = !Turns.m_WhitePlaying; // When a piece is dropped to another spot, the player's turn is done (bool)
-						std::cout << Turns.m_WhitePlaying << std::endl;
+						m_WhitePlaying = !m_WhitePlaying; // When a piece is dropped to another spot, the player's turn is done (bool)
+						std::cout << m_WhitePlaying << std::endl;
 						_case->GetPiece() = nullptr;
 					}
 				}
@@ -142,7 +141,7 @@ void Controls::SaveMove(std::shared_ptr<Case> _case, std::shared_ptr<Vector2> Po
 	SaveGame.open("Save.txt", std::ios::app);
 
 	// Inverse I and J cause x and y are inverted on mouse state.
-	SaveGame << _case->GetOrigin()->GetJ() << " " << _case->GetOrigin()->GetI() << " " << Pos->GetI() << " " << Pos->GetJ() << std::endl;
+	SaveGame << _case->GetOrigin()->GetJ() << _case->GetOrigin()->GetI() << Pos->GetI() << Pos->GetJ() << std::endl;
 
 	SaveGame.close();
 }
