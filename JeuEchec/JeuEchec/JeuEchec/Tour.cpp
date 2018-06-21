@@ -120,6 +120,5 @@ std::vector<std::shared_ptr<Vector2>> Tour::Move(int i, int j, const std::vector
 		}
 	}
 
-
 	return vec;
 }

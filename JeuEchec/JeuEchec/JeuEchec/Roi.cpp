@@ -1,6 +1,7 @@
 #include "Roi.h"
 #include <SDL_image.h>
 #include "Case.h"
+#include "Controls.h"
 
 Roi::Roi(bool IsBlack)
 	: Piece(IsBlack)
@@ -24,6 +25,7 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 	{
 		if (cases[i - 1][j]->GetPiece() == nullptr)
 		{
+			//if(cases[i - 1][j] != GetEnnemiesMoves)
 			vec.push_back(std::make_shared<Vector2>(i - 1, j, true));
 		}
 		else

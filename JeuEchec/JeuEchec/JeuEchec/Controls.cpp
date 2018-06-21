@@ -100,11 +100,13 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 					{
 						SaveMove(_case, Pos);
 						board->GetCase(Pos->GetI(), Pos->GetJ())->GetPiece() = _case->GetPiece();
+						_case->GetPiece() = nullptr;
 
 						m_WhitePlaying = !m_WhitePlaying; // When a piece is dropped to another spot, the player's turn is done (bool)
 						//std::cout << Turns.m_WhitePlaying << std::endl;
 						kingNeedToMove = false;
 						
+						enemiesMoves = std::vector<std::vector<std::shared_ptr<Vector2>>>();
 						for (int i = 0; i < board->GetCases().size(); i++)
 						{
 							for (int j = 0; j < board->GetCases()[i].size(); j++)
@@ -114,19 +116,18 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 									// si la couleur joueur actuel n'est pas la couleur de la piece
 									if (board->GetCases()[i][j]->GetPiece()->GetColor() == m_WhitePlaying)
 									{
-										board->GetCases()[i][j]->GetPiece()->Move(i, j, board->GetCases());
+										enemiesMoves.push_back(board->GetCases()[i][j]->GetPiece()->Move(i, j, board->GetCases()));
 										if (board->GetCases()[i][j]->GetPiece()->GetCanEatKing())
 										{
 											kingNeedToMove = true;
 											std::cout << "KingNeedsToMove" + kingNeedToMove << std::endl;
 											board->GetCases()[i][j]->GetPiece()->SetCanEatKing(false);
+
 										}
 									}
 								}
 							}
 						}
-
-						_case->GetPiece() = nullptr;
 					}
 				}
 
@@ -145,7 +146,7 @@ void Controls::SaveMove(std::shared_ptr<Case> _case, std::shared_ptr<Vector2> Po
 	SaveGame.open("Save.txt", std::ios::app);
 
 	// Inverse I and J cause x and y are inverted on mouse state.
-	SaveGame << _case->GetOrigin()->GetJ() << " " << _case->GetOrigin()->GetI() << " " << Pos->GetI() << " " << Pos->GetJ() << std::endl;
+	SaveGame << _case->GetOrigin()->GetJ() << _case->GetOrigin()->GetI() <<  Pos->GetI() << Pos->GetJ() << std::endl;
 
 	SaveGame.close();
 }
