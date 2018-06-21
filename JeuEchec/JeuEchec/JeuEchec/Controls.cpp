@@ -102,9 +102,7 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 						board->GetCase(Pos->GetI(), Pos->GetJ())->GetPiece() = _case->GetPiece();
 
 						m_WhitePlaying = !m_WhitePlaying; // When a piece is dropped to another spot, the player's turn is done (bool)
-						std::cout << m_WhitePlaying << std::endl;
-						m_WhitePlaying = !m_WhitePlaying; // When a piece is dropped to another spot, the player's turn is done (bool)
-						//std::cout << m_WhitePlaying << std::endl;
+
 						kingNeedToMove = false;
 						
 						for (int i = 0; i < board->GetCases().size(); i++)
