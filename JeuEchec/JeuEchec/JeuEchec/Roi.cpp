@@ -32,6 +32,10 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 			if (myColor != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i - 1, j, true));
+				if (cases[i - 1][j]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -48,6 +52,10 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 			if (myColor != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i - 1, j - 1, true));
+				if (cases[i - 1][j - 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -65,6 +73,10 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 			if (myColor != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i - 1, j + 1, true));
+				if (cases[i - 1][j + 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -82,6 +94,10 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 			if (myColor != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i + 1, j, true));
+				if (cases[i + 1][j]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -98,6 +114,10 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 			if (myColor != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i + 1, j - 1, true));
+				if (cases[i - 1][j]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -114,6 +134,10 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 			if (myColor != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i + 1, j + 1, true));
+				if (cases[i + 1][j + 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -131,6 +155,10 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 			if (myColor != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i, j - 1, true));
+				if (cases[i][j - 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -148,6 +176,10 @@ std::vector<std::shared_ptr<Vector2>> Roi::Move(int i, int j, const std::vector<
 			if (myColor != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i, j + 1, true));
+				if (cases[i][j + 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}

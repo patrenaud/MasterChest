@@ -4,7 +4,8 @@
 
 
 Piece::Piece(bool IsBlack)
-	:isBlack(IsBlack)
+	: isBlack(IsBlack)
+	, canEatKing(false)
 {	
 }
 

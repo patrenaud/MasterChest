@@ -1,6 +1,8 @@
 #include "Cheval.h"
 #include <SDL_image.h>
 #include "Case.h"
+#include "Board.h"
+#include "Controls.h"
 
 Cheval::Cheval(bool IsBlack)
 	: Piece(IsBlack)
@@ -16,7 +18,10 @@ Cheval::~Cheval()
 
 std::vector<std::shared_ptr<Vector2>> Cheval::Move(int i, int j, const std::vector<std::vector<std::shared_ptr<Case>>>& cases)
 {
+	bool canEatKing;
 	std::vector<std::shared_ptr<Vector2>>vec = {};
+	
+
 
 	if (i >= 2 && j <= 6)
 	{
@@ -30,6 +35,10 @@ std::vector<std::shared_ptr<Vector2>> Cheval::Move(int i, int j, const std::vect
 			if (isBlack != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i- 2, j + 1, true));
+				if (cases[i + 2][j + 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -46,9 +55,12 @@ std::vector<std::shared_ptr<Vector2>> Cheval::Move(int i, int j, const std::vect
 			if (isBlack != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i - 2, j - 1, true));
+				if (cases[i - 2][j - 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
-
 	}
 
 	if (i >= 1 && j >= 2)
@@ -63,6 +75,10 @@ std::vector<std::shared_ptr<Vector2>> Cheval::Move(int i, int j, const std::vect
 			if (isBlack != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i - 1, j - 2, true));
+				if (cases[i - 1][j - 2]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -79,6 +95,10 @@ std::vector<std::shared_ptr<Vector2>> Cheval::Move(int i, int j, const std::vect
 			if (isBlack != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i + 1, j - 2, true));
+				if (cases[i + 1][j - 2]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -95,6 +115,10 @@ std::vector<std::shared_ptr<Vector2>> Cheval::Move(int i, int j, const std::vect
 			if (isBlack != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i + 2, j - 1, true));
+				if (cases[i + 2][j - 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -111,6 +135,10 @@ std::vector<std::shared_ptr<Vector2>> Cheval::Move(int i, int j, const std::vect
 			if (isBlack != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i + 2, j + 1, true));
+				if (cases[i + 2][j + 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -127,6 +155,10 @@ std::vector<std::shared_ptr<Vector2>> Cheval::Move(int i, int j, const std::vect
 			if (isBlack != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i + 1, j + 2, true));
+				if (cases[i + 1][j + 2]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -143,6 +175,10 @@ std::vector<std::shared_ptr<Vector2>> Cheval::Move(int i, int j, const std::vect
 			if (isBlack != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i - 1, j + 2, true));
+				if (cases[i - 1][j + 2]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}

@@ -36,6 +36,10 @@ std::vector<std::shared_ptr<Vector2>> Reine::Move(int i, int j, const std::vecto
 			else if (myColor != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(w, j, true));
+				if (cases[w][j]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 				break;
 			}
 		}
@@ -57,6 +61,10 @@ std::vector<std::shared_ptr<Vector2>> Reine::Move(int i, int j, const std::vecto
 			else if (myColor != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(w, j, true));
+				if (cases[w][j]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 				break;
 			}
 		}
@@ -78,6 +86,10 @@ std::vector<std::shared_ptr<Vector2>> Reine::Move(int i, int j, const std::vecto
 			else if (myColor != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i, w, true));
+				if (cases[i][w]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 				break;
 			}
 		}
@@ -99,6 +111,10 @@ std::vector<std::shared_ptr<Vector2>> Reine::Move(int i, int j, const std::vecto
 			else if (myColor != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i, w, true));
+				if (cases[i][w]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 				break;
 			}
 		}
@@ -122,6 +138,10 @@ std::vector<std::shared_ptr<Vector2>> Reine::Move(int i, int j, const std::vecto
 				else if (isBlack != destination)
 				{
 					vec.push_back(std::make_shared<Vector2>(i + w, j + w, true));
+					if (cases[i + w][j + w]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+					{
+						canEatKing = true;
+					}
 					break;
 				}
 			}
@@ -146,6 +166,10 @@ std::vector<std::shared_ptr<Vector2>> Reine::Move(int i, int j, const std::vecto
 				else if (isBlack != destination)
 				{
 					vec.push_back(std::make_shared<Vector2>(i - w, j - w, true));
+					if (cases[i - w][j - w]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+					{
+						canEatKing = true;
+					}
 					break;
 				}
 			}
@@ -170,6 +194,10 @@ std::vector<std::shared_ptr<Vector2>> Reine::Move(int i, int j, const std::vecto
 				else if (isBlack != destination)
 				{
 					vec.push_back(std::make_shared<Vector2>(i - w, j + w, true));
+					if (cases[i - w][j + w]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+					{
+						canEatKing = true;
+					}
 					break;
 				}
 			}
@@ -194,11 +222,13 @@ std::vector<std::shared_ptr<Vector2>> Reine::Move(int i, int j, const std::vecto
 				else if (isBlack != destination)
 				{
 					vec.push_back(std::make_shared<Vector2>(i + w, j - w, true));
+					canEatKing = cases[i + w][j - w]->GetPiece()->GetPieceType() == Piece::PieceType::Roi;
 					break;
 				}
 			}
 		}
 	}
+
 
 	return vec;
 }
