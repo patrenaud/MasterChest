@@ -109,6 +109,7 @@ int main(int argc, char* args[])
 
 		//While application is running
 		while (!quit)
+		{
 			//Update the surface
 			SDL_UpdateWindowSurface(gWindow);
 
@@ -117,11 +118,11 @@ int main(int argc, char* args[])
 
 			// This calls the diffrent events that can be called by user controls
 			controls->Update(board, gScreenSurface);
-if (fichier.is_open())  // si l'ouverture a réussi
+			if (fichier.is_open())  // si l'ouverture a réussi
 			{
 				std::vector<std::vector<int>> StartMoves = std::vector<std::vector<int>>();
 				std::vector<std::vector<int>> EndMoves = std::vector<std::vector<int>>();
-				
+
 				while (!fichier.eof())
 				{
 					char buffer[256];
@@ -138,9 +139,9 @@ if (fichier.is_open())  // si l'ouverture a réussi
 				{
 					board->GetCase(EndMoves[i][0], EndMoves[i][1])->GetPiece() = board->GetCase(StartMoves[i][0], StartMoves[i][1])->GetPiece();
 					board->GetCase(StartMoves[i][0], StartMoves[i][1])->GetPiece() = nullptr;
-					
 
-//Update the surface
+
+					//Update the surface
 					SDL_UpdateWindowSurface(gWindow);
 
 					// Ceci est pour render le board
@@ -150,8 +151,10 @@ if (fichier.is_open())  // si l'ouverture a réussi
 				}
 
 				controls->m_WhitePlaying = !(StartMoves.size() % 2);
-			}		}
-	}	
+			}
+		}
+	}
+
 
 
 	system("pause");
