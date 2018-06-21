@@ -33,6 +33,9 @@ public:
 	// Ici on doit avoir une VIRTUAL fonction pour le déplacement 
 	const bool GetColor() { return isBlack; }
 
+	const bool GetCanEatKing() { return canEatKing; }
+	void SetCanEatKing(const bool canEat) { canEatKing = canEat; }
+
 	const PieceType GetPieceType() { return m_Type; }
 
 	virtual std::vector<std::shared_ptr<Vector2>> Move(int i, int j, const std::vector<std::vector<std::shared_ptr<Case>>>& cases)
@@ -42,7 +45,7 @@ public:
 
 protected:
 
-
+	bool canEatKing;
 	bool isBlack;
 	PieceType m_Type;
 };

@@ -22,6 +22,7 @@ std::vector<std::shared_ptr<Vector2>> Pion::Move(int i, int j, const std::vector
 	bool BeenPlayed = false;
 	bool destination;
 
+	
 	if (!isBlack)
 	{
 		if (cases[i+1][j]->GetPiece() == nullptr)
@@ -41,6 +42,10 @@ std::vector<std::shared_ptr<Vector2>> Pion::Move(int i, int j, const std::vector
 			if (isBlack != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i + 1, j + 1, true));
+				if (cases[i + 1][j + 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -52,6 +57,10 @@ std::vector<std::shared_ptr<Vector2>> Pion::Move(int i, int j, const std::vector
 			if (isBlack != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i + 1, j - 1, true));
+				if (cases[i + 1][j - 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				{
+					canEatKing = true;
+				}
 			}
 		}
 	}
@@ -75,6 +84,10 @@ std::vector<std::shared_ptr<Vector2>> Pion::Move(int i, int j, const std::vector
 				if (isBlack != destination)
 				{
 					vec.push_back(std::make_shared<Vector2>(i - 1, j - 1, true));
+					if (cases[i - 1][j - 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+					{
+						canEatKing = true;
+					}
 				}
 			}
 		}
@@ -86,10 +99,15 @@ std::vector<std::shared_ptr<Vector2>> Pion::Move(int i, int j, const std::vector
 				if (isBlack != destination)
 				{
 					vec.push_back(std::make_shared<Vector2>(i - 1, j + 1, true));
+					if (cases[i - 1][j + 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+					{
+						canEatKing = true;
+					}
 				}
 			}
 		}
 	}
+
 
 	return vec;
 }
