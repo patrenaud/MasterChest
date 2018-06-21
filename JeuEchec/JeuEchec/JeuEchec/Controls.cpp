@@ -103,7 +103,7 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 						_case->GetPiece() = nullptr;
 
 						m_WhitePlaying = !m_WhitePlaying; // When a piece is dropped to another spot, the player's turn is done (bool)
-						//std::cout << Turns.m_WhitePlaying << std::endl;
+
 						kingNeedToMove = false;
 						
 						enemiesMoves = std::vector<std::vector<std::shared_ptr<Vector2>>>();
@@ -127,8 +127,7 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 									}
 								}
 							}
-						}
-					}
+						_case->GetPiece() = nullptr;					}
 				}
 
 				_case->Reset();
@@ -146,7 +145,8 @@ void Controls::SaveMove(std::shared_ptr<Case> _case, std::shared_ptr<Vector2> Po
 	SaveGame.open("Save.txt", std::ios::app);
 
 	// Inverse I and J cause x and y are inverted on mouse state.
-	SaveGame << _case->GetOrigin()->GetJ() << _case->GetOrigin()->GetI() <<  Pos->GetI() << Pos->GetJ() << std::endl;
+	SaveGame << _case->
+	SaveGame << _case->GetOrigin()->GetJ() << _case->GetOrigin()->GetI() << Pos->GetI() << Pos->GetJ() << std::endl;
 
 	SaveGame.close();
 }
