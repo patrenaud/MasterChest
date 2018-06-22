@@ -36,10 +36,8 @@ SDL_Window* gWindow = NULL;
 //The surface contained by the window
 SDL_Surface* gScreenSurface = NULL;
 
-
 bool init()
 {
-
 	//Initialization flag
 	bool success = true;
 
@@ -88,9 +86,8 @@ void close()
 	SDL_Quit();
 }
 
-
 int main(int argc, char* args[])
-{
+{	
 	//Start up SDL and create window
 	if (!init())
 	{
@@ -118,6 +115,7 @@ int main(int argc, char* args[])
 
 			// This calls the diffrent events that can be called by user controls
 			controls->Update(board, gScreenSurface);
+
 			if (fichier.is_open())  // si l'ouverture a réussi
 			{
 				std::vector<std::vector<int>> StartMoves = std::vector<std::vector<int>>();
@@ -129,6 +127,7 @@ int main(int argc, char* args[])
 					fichier.getline(buffer, 256);
 					if (buffer[0] != '\0')
 					{
+						// The parameters were from teacher help (-48 !?)
 						StartMoves.push_back(std::vector<int>({ (int)buffer[0] - 48, (int)buffer[1] - 48 }));
 						EndMoves.push_back(std::vector<int>({ (int)buffer[2] - 48, (int)buffer[3] - 48 }));
 					}
@@ -137,9 +136,9 @@ int main(int argc, char* args[])
 
 				for (int i = 0; i < StartMoves.size(); i++)
 				{
+					// 
 					board->GetCase(EndMoves[i][0], EndMoves[i][1])->GetPiece() = board->GetCase(StartMoves[i][0], StartMoves[i][1])->GetPiece();
 					board->GetCase(StartMoves[i][0], StartMoves[i][1])->GetPiece() = nullptr;
-
 
 					//Update the surface
 					SDL_UpdateWindowSurface(gWindow);
@@ -147,16 +146,12 @@ int main(int argc, char* args[])
 					// Ceci est pour render le board
 					board->Render(gScreenSurface);
 
-					SDL_Delay(1000);
+					SDL_Delay(1000); // 1000 miliseconds between each moves in save game restart
 				}
-
-				controls->m_WhitePlaying = !(StartMoves.size() % 2);
+				controls->m_WhitePlaying = !(StartMoves.size() % 2); // This will make the next move after load game be the right player
 			}
 		}
 	}
-
-
-
 	system("pause");
 	//Free resources and close SDL
 	close();

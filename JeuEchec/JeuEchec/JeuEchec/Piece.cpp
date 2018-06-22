@@ -9,7 +9,6 @@ Piece::Piece(bool IsBlack)
 {	
 }
 
-
 Piece::~Piece()
 {
 	//Free loaded image

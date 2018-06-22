@@ -9,7 +9,6 @@ Tour::Tour(bool IsBlack)
 	Piece::m_Type = PieceType::Tour;
 }
 
-
 Tour::~Tour()
 {
 }
@@ -20,7 +19,6 @@ std::vector<std::shared_ptr<Vector2>> Tour::Move(int i, int j, const std::vector
 
 	for (int w = i-1; w >= 0; w--)
 	{
-
 		if (cases[w][j]->GetPiece() == nullptr)
 		{
 			vec.push_back(std::make_shared<Vector2>(w, j, true));

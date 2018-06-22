@@ -9,7 +9,6 @@ Reine::Reine(bool IsBlack)
 	Piece::m_Type = PieceType::Reine;
 }
 
-
 Reine::~Reine()
 {
 }
@@ -20,7 +19,6 @@ std::vector<std::shared_ptr<Vector2>> Reine::Move(int i, int j, const std::vecto
 
 	for (int w = i - 1; w >= 0; w--)
 	{
-
 		if (cases[w][j]->GetPiece() == nullptr)
 		{
 			vec.push_back(std::make_shared<Vector2>(w, j, true));
@@ -228,7 +226,6 @@ std::vector<std::shared_ptr<Vector2>> Reine::Move(int i, int j, const std::vecto
 			}
 		}
 	}
-
 
 	return vec;
 }

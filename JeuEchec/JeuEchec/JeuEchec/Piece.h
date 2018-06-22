@@ -7,7 +7,6 @@
 
 class Case;
 
-
 class Piece
 {
 public:
@@ -27,16 +26,13 @@ public:
 	~Piece();
 
 	void Render(SDL_Surface* gScreenSurface, SDL_Rect* Rect);
-
-	SDL_Surface* m_Texture;
-
-	// Ici on doit avoir une VIRTUAL fonction pour le déplacement 
-	const bool GetColor() { return isBlack; }
-
-	const bool GetCanEatKing() { return canEatKing; }
 	void SetCanEatKing(const bool canEat) { canEatKing = canEat; }
 
+	SDL_Surface* m_Texture;
 	const PieceType GetPieceType() { return m_Type; }
+
+	const bool GetColor() { return isBlack; }
+	const bool GetCanEatKing() { return canEatKing; }		
 
 	virtual std::vector<std::shared_ptr<Vector2>> Move(int i, int j, const std::vector<std::vector<std::shared_ptr<Case>>>& cases)
 	{

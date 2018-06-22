@@ -20,8 +20,6 @@ std::vector<std::shared_ptr<Vector2>> Cheval::Move(int i, int j, const std::vect
 {
 	bool canEatKing;
 	std::vector<std::shared_ptr<Vector2>>vec = {};
-	
-
 
 	if (i >= 2 && j <= 6)
 	{
@@ -35,7 +33,7 @@ std::vector<std::shared_ptr<Vector2>> Cheval::Move(int i, int j, const std::vect
 			if (isBlack != destination)
 			{
 				vec.push_back(std::make_shared<Vector2>(i- 2, j + 1, true));
-				if (cases[i + 2][j + 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
+				if (cases[i - 2][j + 1]->GetPiece()->GetPieceType() == Piece::PieceType::Roi)
 				{
 					canEatKing = true;
 				}
@@ -183,6 +181,5 @@ std::vector<std::shared_ptr<Vector2>> Cheval::Move(int i, int j, const std::vect
 		}
 	}
 
-	return vec;
-	
+	return vec;	
 }

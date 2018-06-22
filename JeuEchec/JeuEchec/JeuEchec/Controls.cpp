@@ -14,16 +14,18 @@ Controls::~Controls()
 {
 }
 
+void ReloadGame()
+{
+	// Cette fonction est pour redémarrer la partie
+}
+
 void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 {
-
 	//Main loop flag
 	bool quit = false;
 
 	//Event handler
 	SDL_Event e;
-	//std::cout << WhiteKingNeedsToMove << std::endl;
-
 
 	if (_case != nullptr)
 	{
@@ -33,6 +35,14 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 	//Handle events on queue
 	while (SDL_PollEvent(&e) != 0)
 	{
+		if (e.type == SDL_KEYDOWN)
+		{
+			if (e.key.keysym.sym == SDLK_SPACE)
+			{
+				printf("Restart Game");
+				ReloadGame();
+			}
+		}
 
 		//User requests quit
 		if (e.type == SDL_QUIT)
@@ -40,6 +50,7 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 			quit = true;
 		}
 
+		// User Mouse hover 
 		if (e.type == SDL_MOUSEMOTION)
 		{
 			int x = 0;
@@ -62,11 +73,13 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 			std::shared_ptr<Vector2> Pos = std::make_shared<Vector2>(x, y);
 
 			_case = board->GetCase(Pos->GetI(), Pos->GetJ());
+
 			// Need to find a Piece and it has to be the right color depending on turn
 			if (_case->GetPiece() != nullptr && _case->GetPiece()->GetColor() == !m_WhitePlaying)
 			{
 				if (!kingNeedToMove || (kingNeedToMove && _case->GetPiece()->GetPieceType() == Piece::Roi))
 				{
+					// This provides the diffrent moves the player can make with this Piece
 					availableMoves = _case->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
 
 					for (int i = 0; i < availableMoves.size(); i++)
@@ -98,7 +111,7 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 					if (Pos->GetI() == availableMoves[i]->GetI() &&
 						Pos->GetJ() == availableMoves[i]->GetJ())
 					{
-						SaveMove(_case, Pos);
+						SaveMove(_case, Pos); // Saves the move in the Save.txt file
 						board->GetCase(Pos->GetI(), Pos->GetJ())->GetPiece() = _case->GetPiece();
 						_case->GetPiece() = nullptr;
 
@@ -106,6 +119,7 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 
 						kingNeedToMove = false;
 
+						// This cheks all the other side's object to see if the King is in danger
 						enemiesMoves = std::vector<std::vector<std::shared_ptr<Vector2>>>();
 						for (int i = 0; i < board->GetCases().size(); i++)
 						{
@@ -116,13 +130,12 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 									// si la couleur joueur actuel n'est pas la couleur de la piece
 									if (board->GetCases()[i][j]->GetPiece()->GetColor() == m_WhitePlaying)
 									{
-										enemiesMoves.push_back(board->GetCases()[i][j]->GetPiece()->Move(i, j, board->GetCases()));
+										board->GetCases()[i][j]->GetPiece()->Move(i, j, board->GetCases());
 										if (board->GetCases()[i][j]->GetPiece()->GetCanEatKing())
 										{
 											kingNeedToMove = true;
 											std::cout << "KingNeedsToMove" + kingNeedToMove << std::endl;
 											board->GetCases()[i][j]->GetPiece()->SetCanEatKing(false);
-
 										}
 									}
 								}
@@ -130,8 +143,6 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 							_case->GetPiece() = nullptr;
 						}
 					}
-
-
 				}
 				_case->Reset();
 				_case = nullptr;
@@ -139,7 +150,6 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 		}
 	}
 }
-
 
 void Controls::SaveMove(std::shared_ptr<Case> _case, std::shared_ptr<Vector2> Pos)
 {
@@ -152,31 +162,3 @@ void Controls::SaveMove(std::shared_ptr<Case> _case, std::shared_ptr<Vector2> Po
 	SaveGame.close();
 }
 
-
-/*void Controls::CheckKingStatus(const std::shared_ptr<Board>& board)
-{
-	int x = 0;
-	int y = 0;
-	SDL_GetMouseState(&y, &x);
-	std::shared_ptr<Vector2> Pos = std::make_shared<Vector2>(x, y);
-	Controls CheckWin;
-
-	std::vector<std::shared_ptr<Vector2>> CheckDanger = CheckWin.GetCurrentCase()->GetPiece()->Move(Pos->GetI(), Pos->GetJ(), board->GetCases());
-
-	for (int i = 0; i < CheckDanger.size(); i++)
-	{
-		// m_case crée la liste des mouvement de la nouvelle position de la pièce bougée
-		std::shared_ptr<Case> m_case = board->GetCase(CheckDanger[i]->GetI(), CheckDanger[i]->GetJ());
-
-		if ((m_case->GetPiece()->GetPieceType() == Piece::PieceType::Roi) && m_case->GetPiece()->GetColor())
-		{
-			KingNeedsToMove = true;
-			break;
-		}
-		else if ((m_case->GetPiece()->GetPieceType() == Piece::PieceType::Roi) && m_case->GetPiece()->GetColor() == false)
-		{
-			KingNeedsToMove = true;
-			break;
-		}
-	}
-}*/

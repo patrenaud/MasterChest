@@ -1,8 +1,6 @@
 #include "Case.h"
 #include "Piece.h"
 
-
-
 Case::Case(const int x, const int y, std::shared_ptr<Piece> aPiece)
 {
 	XPos = x;
@@ -12,7 +10,6 @@ Case::Case(const int x, const int y, std::shared_ptr<Piece> aPiece)
 	gContours = IMG_Load("images/Contour.png");
 	m_Highlight = false;
 }
-
 
 Case::~Case()
 {

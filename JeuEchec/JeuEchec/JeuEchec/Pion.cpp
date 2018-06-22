@@ -21,7 +21,6 @@ std::vector<std::shared_ptr<Vector2>> Pion::Move(int i, int j, const std::vector
 	bool isBlack = cases[i][j]->GetPiece()->GetColor();
 	bool BeenPlayed = false;
 	bool destination;
-
 	
 	if (!isBlack)
 	{
@@ -107,7 +106,6 @@ std::vector<std::shared_ptr<Vector2>> Pion::Move(int i, int j, const std::vector
 			}
 		}
 	}
-
 
 	return vec;
 }

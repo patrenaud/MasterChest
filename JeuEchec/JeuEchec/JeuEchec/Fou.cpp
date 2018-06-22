@@ -134,7 +134,5 @@ std::vector<std::shared_ptr<Vector2>> Fou::Move(int i, int j, const std::vector<
 		}
 	}
 	
-
-	
 	return vec;
 }

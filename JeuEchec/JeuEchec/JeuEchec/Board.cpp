@@ -4,14 +4,12 @@
 #include <string>
 #include <memory>
 #include "Case.h"
-
 #include "Pion.h"
 #include "Tour.h"
 #include "Cheval.h"
 #include "Fou.h"
 #include "Reine.h"
 #include "Roi.h"
-
 
 Board::Board()
 {
@@ -20,7 +18,6 @@ Board::Board()
 	
 	// Création du board
 	gBoard = { 0, 0, 1000, 800 };
-
 
 	// Cette boucle est pour créer les différentes cases
 	for (int i = 0; i < 8; i++)
@@ -110,7 +107,4 @@ void Board::Render(SDL_Surface* gScreenSurface)
 			gCase[i][j]->Render(gScreenSurface);
 		}
 	}
-	
-
-	// Ici on peut afficher des boutons pour les différentes options
 }
