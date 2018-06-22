@@ -113,8 +113,15 @@ int main(int argc, char* args[])
 			// Ceci est pour render le board
 			board->Render(gScreenSurface);
 
-			// This calls the diffrent events that can be called by user controls
-			controls->Update(board, gScreenSurface);
+			// This is to reset game
+			if (controls->Update(board, gScreenSurface))
+			{
+				board.reset();
+				board = std::make_shared<Board>();
+				controls.reset();
+				controls = std::make_shared<Controls>();
+				remove("Save.txt");
+			}
 
 			if (fichier.is_open())  // si l'ouverture a réussi
 			{

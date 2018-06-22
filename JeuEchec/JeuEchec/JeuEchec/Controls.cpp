@@ -14,12 +14,9 @@ Controls::~Controls()
 {
 }
 
-void ReloadGame()
-{
-	// Cette fonction est pour redémarrer la partie
-}
 
-void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
+
+bool Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 {
 	//Main loop flag
 	bool quit = false;
@@ -39,8 +36,8 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 		{
 			if (e.key.keysym.sym == SDLK_SPACE)
 			{
-				printf("Restart Game");
-				ReloadGame();
+				std::cout << "Restart Game" << std::endl;
+				return true;
 			}
 		}
 
@@ -66,7 +63,6 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 
 		if (e.type == SDL_MOUSEBUTTONDOWN)
 		{
-
 			int x = 0;
 			int y = 0;
 			SDL_GetMouseState(&y, &x);
@@ -149,6 +145,7 @@ void Controls::Update(const std::shared_ptr<Board>& board, SDL_Surface* screen)
 			}
 		}
 	}
+	return false;
 }
 
 void Controls::SaveMove(std::shared_ptr<Case> _case, std::shared_ptr<Vector2> Pos)

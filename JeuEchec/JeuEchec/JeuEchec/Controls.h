@@ -17,7 +17,7 @@ public:
 	const bool GetKingToMove() { return kingNeedToMove; }
 	bool m_WhitePlaying = true;
 
-	void Update(const std::shared_ptr<Board>& board, SDL_Surface* screen);
+	bool Update(const std::shared_ptr<Board>& board, SDL_Surface* screen);
 	void SaveMove(std::shared_ptr<Case> _case, std::shared_ptr<Vector2> Pos);
 
 	const std::shared_ptr<Case> &GetCurrentCase() { return _case; }
